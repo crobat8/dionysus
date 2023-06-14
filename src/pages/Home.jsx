@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
-
-import Log from '../componets/Log';
-import Graphs from '../componets/Graphs';
-import Workouts from '../componets/Workouts';
-
 import Navbar from '../componets/Navbar';
-import Goals from '../componets/Goals';
 
+import Parties from '../componets/Parties';
+import Create from '../componets/Create';
+import Friends from '../componets/Friends';
+
+import logo from '../img/partyuplogo.png'
 
 //import Chat from "../componets/Chat";
 
 const Home = () =>{ 
     
-    const [count,setCount] = useState(1);
+    const [page,setPage] = useState(1);
     
     function HandleSwap(){
         
-        if(count === 1){
-            return <Log/>;
-        }else if(count === 2){
-            return <Graphs/>
-        }else if(count === 3){
-            return <Workouts/>
-        }else if(count === 4){
-            return <Goals/>
+        if(page === 1){
+            return <Parties/>;
+        }else if(page === 2){
+            return <Create/>
+        }else if(page === 3){
+            return <Friends/>
         }else {
             return null;
         }
@@ -32,28 +29,38 @@ const Home = () =>{
     
     return (
         <div className="home">
-            <div className="container">
-                <div >
-                    <div className="sidebar">
-                        <Navbar/>  
-                        <button onClick={()=>setCount(1)}>
-                            Log
-                        </button>
-                        <button onClick={()=>setCount(2)}>
-                            Graph
-                        </button>
-                        {
-                        //<button onClick={()=>setCount(3)}>}
-                            //Workout
-                        //</button>
-                        }
-                        <button onClick={()=>setCount(4)}>
-                            Goals
-                        </button>
-                    </div>
+            <header className="topBar">
+                
+                <img src={logo} alt='logo'/>
+                
+
+                <ul className="selectors">
+                    <button onClick={()=>setPage(1)}>
+                        Parties
+                    </button>
+                    <button onClick={()=>setPage(2)}>
+                        Create
+                    </button>
+                    <button onClick={()=>setPage(3)}>
+                        Friends
+                    </button>
+                </ul>
+                <div>
+
                 </div>
+                {
+                    //logout button goes here
+                }
+                
+            </header>
+            <main className="page">
                 <HandleSwap/>
-            </div>
+            </main>
+            <footer className="information">
+                {
+                    //add stuff to reach moderators here
+                }
+            </footer>
         </div>
     )
 }

@@ -1,20 +1,46 @@
-@mixin mobile{
-    @media screen and (max-width: 480px){
-        @content;
-    }
-}
-@mixin tablet{
-    @media screen and (max-width: 700px){
-        @content;
-    }
-}
-@mixin laptop{
-    @media screen and (max-width: 1200px){
-        @content;
-    }
-}
+$darkColor1: #00618c;
+$darkColor2: #04222b;
+$lightColor1: #00aabb;
+$lightColor2: #00b2be;
+$usedgray:#202020;
 
-$darkColor: #2f2d52;
+
+* {    
+    margin: 0 ;
+    padding: 0 ;
+    .home{
+        
+        
+        img{
+            margin: auto;
+            max-height: 75px;
+            
+        }
+
+        .topBar{
+            background-color: black ;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr ;
+            height: 100px;
+            .selectors{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                button{
+                    margin: auto;
+                    height: 50px;
+                    width: 100px;
+                    background-color: black;
+                    color: $lightColor1;
+                    border-color: $lightColor1;
+                }
+                button:hover{
+                    background-color: $usedgray;
+                    
+                }
+            }
+        }
+    }
+}
 
 .formContainer{
     background-color: #a7bcff;
@@ -87,144 +113,3 @@ $darkColor: #2f2d52;
     }
 }
 
-.home{
-    background-color: #a7bcff;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .container{
-        border: 1px solid white;
-        border-radius: 10px;
-        width: 65%;
-        height: 80%;
-        display: flex;
-        overflow: hidden;
-        font-weight: bold;
-        @include tablet{
-            width: 90%;;
-        }
-        .eventselect{
-            
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-
-            button{
-                width: 25%;
-                background-color: #7b96ec;
-                color: white;
-                padding: 10px;
-                font-weight: bold;
-                border: none;
-                cursor: pointer;
-            }
-            button:hover{
-                background-color: #3e3c61;
-                color: white;
-            }
-        }
-        .Log{
-            background-color: #ddddf7;
-            height: 100%;
-            padding: 10px;
-            
-            
-            
-            label{
-                float: left;
-                width:100%;
-                margin-bottom: 5px;
-                
-            }
-            input{
-                float: left;
-                width:100%;
-                margin-bottom: 10px;
-                
-            }
-            
-        }
-        .graphView{
-            margin:4px, 4px;
-                padding:4px;
-                background-color: #ddddf7;
-                width: 100%;
-                
-                overflow-x: hidden;
-                overflow-y: auto;
-                text-align:justify;
-        }
-        .sidebar{
-            flex: 1;
-            background-color: #3e3c61;
-            position: relative;
-            height: 100%;
-            width: 150px;
-
-            button{
-                background-color: #3e3c61;
-                color: #ddddf7;
-                font-size: 10px;
-                border: none;
-                cursor: pointer;
-                font-weight: bold;
-                display: block;
-                width: 100%;
-                height: 10%;
-                margin-top: 10px;
-            }
-            button:hover{
-                background-color: $darkColor;
-                color: white;
-            }
-
-            .navbar{
-                display: block;
-                align-items: center;
-                background-color: $darkColor;
-                height: 50px;
-                padding: 10px;
-                justify-content: space-between;
-                color: #ddddf7;
-                .logo{
-                    font-weight: bold;
-                    @include tablet{
-                        display: none;
-                    }
-                }
-                .user{
-                    display: flex;
-                    gap: 10px;
-                    
-                    img{
-                        background-color: #ddddf7;
-                        height: 24px;
-                        width: 24px;
-                        border-radius: 50%;
-                        object-fit: cover;
-
-                    }
-                    button{
-                        background-color: #5d5d8d;
-                        color: #ddddf7;
-                        font-size: 10px;
-                        border: none;
-                        cursor: pointer;
-                        font-weight: bold;
-                        position: absolute;
-                        bottom: 10px;
-                        width: 80%;
-                        left: 10%;
-                        
-                    }
-                    button:hover{
-                        background-color: $darkColor;
-                        color: white;
-                    }
-                }
-
-            }
-        }
-    }
-}

@@ -10,14 +10,12 @@ $usedgray:#202020;
     padding: 0 ;
     .home{
         
-        
-        img{
+        .topBar{
+            img{
             margin: auto;
             max-height: 75px;
             
-        }
-
-        .topBar{
+            }
             background-color: black ;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr ;
@@ -27,8 +25,11 @@ $usedgray:#202020;
                 grid-template-columns: 1fr 1fr 1fr;
                 button{
                     margin: auto;
+                    margin-left: 5px;
+                    margin-right: 5px;
                     height: 50px;
                     width: 100px;
+                    border-radius: 15%;
                     background-color: black;
                     color: $lightColor1;
                     border-color: $lightColor1;
@@ -39,8 +40,51 @@ $usedgray:#202020;
                 }
             }
         }
+        .page{
+            background-color: $usedgray;
+            height: 1000px;
+            .create{
+                .map{
+                    .map-h2 {
+                    text-transform: uppercase;
+                    font-size: 1rem;
+                    padding: 20px;
+                    padding-left: 10px;
+                    text-align: center;
+                    }
+                    .google-map {
+                        margin: auto;
+                        width: 50%;
+                        max-height: 500px;
+                        
+                    }
+                    .pin {
+                        display: flex;
+                        align-items: center;
+                        width: 180px;
+                        color: var(--main-blue);
+                        .pin-icon {
+                            font-size: 8rem;
+                        }
+                          
+                        .pin-text {
+                            font-size: 1.3em;
+                        }
+                    }
+                }
+                
+            } 
+        }
     }
 }
+
+
+
+
+
+
+
+
 
 .formContainer{
     background-color: #a7bcff;

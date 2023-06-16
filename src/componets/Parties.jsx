@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 const Parties = () =>{ 
 
     
+    
     return (
         <div className="Parties">
             <div className='left'>

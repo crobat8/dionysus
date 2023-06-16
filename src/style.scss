@@ -42,38 +42,57 @@ $usedgray:#202020;
         }
         .page{
             background-color: $usedgray;
-            height: 1000px;
+            padding-bottom: 20px;
             .create{
-                .map{
-                    .map-h2 {
-                    text-transform: uppercase;
-                    font-size: 1rem;
-                    padding: 20px;
-                    padding-left: 10px;
+                
+                .Form{
+                    margin-left: auto;
+                    margin-right: auto;
+                    background-color: #00b2be;
                     text-align: center;
+                    align-items: center;
+                    width: 50%;
+                    border-radius: 15%;
+                    padding: 15px;
+                    
+                    select{
+                        display: block;
+                        font-size:20px;
+                        padding:4px 2px;
+                        border:solid 1px #aacfe4;
+                        width:300px;
+                        margin:2px 0 20px 10px;
+                        margin-right: auto;
+                        margin-left: auto;
                     }
-                    .google-map {
-                        margin: auto;
-                        width: 50%;
-                        max-height: 500px;
-                        
+                    label{
+                        font-size: 30px;
                     }
-                    .pin {
-                        display: flex;
-                        align-items: center;
-                        width: 180px;
-                        color: var(--main-blue);
-                        .pin-icon {
-                            font-size: 8rem;
-                        }
-                          
-                        .pin-text {
-                            font-size: 1.3em;
-                        }
+                    input{
+                        display: block;
+                        font-size:20px;
+                        padding:4px 2px;
+                        border:solid 1px #aacfe4;
+                        width:300px;
+                        margin:2px 0 20px 10px;
+                        margin-right: auto;
+                        margin-left: auto;
+                    }
+                    textarea{
+                        font-size:20px;
+                    }
+                    button{
+                        margin-top: 20px;
+                        height: 30px;
+                        width: 200px;
                     }
                 }
-                
             } 
+        }
+        .information{
+            background-color: green;
+            
+            height: 100px;
         }
     }
 }

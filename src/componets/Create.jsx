@@ -1,4 +1,4 @@
-import React,{useState,useRef} from 'react'
+import React,{useState,useRef,useContext} from 'react'
 
 import {
     Box,
@@ -18,6 +18,10 @@ import {
     Autocomplete,
     DirectionsRenderer,
   } from '@react-google-maps/api'
+  import {  db  } from "../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { AuthContext } from "../context/AuthContext";
+import Geocode from "react-geocode";
 
   //default location aka paris
   var center = {lat: 48.8584, lng: 2.2945}
@@ -46,10 +50,21 @@ const Create = () =>{
       const [directionsResponse, setDirectionsResponse] = useState(null)
       const [distance, setDistance] = useState('')
       const [duration, setDuration] = useState('')
+
       const [partyLocation,setPartyLocation] = useState(center);
-      
+      Geocode.setApiKey("AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0");
+      Geocode.fromLatLng(center.lat, center.lng).then(
+        (response) => {
+          const address = response.results[0].formatted_address;
+          setPartyLocation(address);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
       //const handleChange = (event) => setPartyL(event.target.value);
 
+      const{currentUser} = useContext(AuthContext);
     
       /** @type React.MutableRefObject<HTMLInputElement> */
       const originRef = useRef()
@@ -90,35 +105,75 @@ const Create = () =>{
         destiantionRef.current.value = ''
       }
       
+      const handleSubmit = async (e) => {
+        
+        e.preventDefault();
+        
+        console.log(e)
+
+        const EventType = e.target[0].value;
+        const Title = e.target[1].value;
+        const Description = e.target[2].value;
+        const Attending = e.target[3].value;
+        const Wanted = e.target[4].value;
+        const Location = partyLocation;
+
+
+        
+        
+        try{
+            
+            await setDoc(doc(db, "Event", currentUser.uid), {
+                uid: currentUser.uid,
+                EventType,
+                Title,
+                Description,
+                Attending,
+                Wanted,
+                Location,
+
+                
+                
+              });
+              alert("event was succesfully added");
+        }catch(err){
+            alert(err)
+        }
+
+        
+    }
+
+
       return (
-        <Flex
-          position='relative'
-          flexDirection='column'
-          alignItems='center'
-          h='100vh'
-          w='100vw'
-        >
-            
-        <Box position='absolute' left={screen} top={50} h='100%' w='100%'>
-            
-            <GoogleMap
-              center={center}
-              zoom={15}
-              mapContainerStyle={{ width: '50%', height: '50%' }}
-              options={{
-                zoomControl: false,
-                streetViewControl: false,
-                mapTypeControl: false,
-                fullscreenControl: false,
-              }}
-              onLoad={map => setMap(map)}
+        <div className='create'>
+            <Flex
+          
+                flexDirection='column'
+                alignItems='center'
+                h='700px'
+                w='100vw'
             >
-              <Marker position={center} />
-              {directionsResponse && (
+            
+            <Box mt={20} left={screen} top={100} h='600px' w='80%'>
+            
+                <GoogleMap
+                    center={center}
+                    zoom={15}
+                    mapContainerStyle={{ width: '100%', height: '100%' }}
+                    options={{
+                        zoomControl: false,
+                        streetViewControl: false,
+                        mapTypeControl: false,
+                        fullscreenControl: false,
+                    }}
+                    onLoad={map => setMap(map)}
+                >
+                <Marker position={center} />
+                {directionsResponse && (
                 <DirectionsRenderer directions={directionsResponse} />
-              )}
-            </GoogleMap>
-          </Box>
+                )}
+                </GoogleMap>
+            </Box>
           <Box
             p={4}
             borderRadius='lg'
@@ -178,7 +233,56 @@ const Create = () =>{
               />
             </HStack>
           </Box>
-        </Flex>
+          
+            </Flex>
+            <form className="Form" onSubmit={handleSubmit}>
+                <label for="Event" >
+                    Event Type:
+                    <select required id='EventType' name="EventType">
+                        <option value="BasketBall">BasketBall</option>
+                        <option value="House Party">House Party</option>
+                        <option value="Corn Hole">Corn Hole</option>
+                    </select>
+                </label>
+
+                
+                <label for="Title" >Title:</label>
+                <input required id="Title" name="Title"/>
+                <label for="Description" >Description:</label>
+                <textarea rows="5" cols="40" id="Description" name="Description" placeholder="Enter text"/>
+                <label for="attendingCount" >
+                    How many people do you have coming so far:
+                    <select required id='attendingCount' name="attendingCount">
+                        <option value="0">0</option>
+                        <option value="1" selected="selected">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="6+">6+</option>
+
+                    </select>
+                </label>
+                <label for="attendingWanted" >
+                    How many people do you have coming so far:
+                    <select required id='attendingWanted' name="attendingWanted">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="6+" selected="selected">6+</option>
+
+                    </select>
+                </label>
+                <button>Log</button>
+
+            </form>
+        </div>
+        
 
 
       )

@@ -53,15 +53,7 @@ const Create = () =>{
 
       const [partyLocation,setPartyLocation] = useState(center);
       Geocode.setApiKey("AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0");
-      Geocode.fromLatLng(center.lat, center.lng).then(
-        (response) => {
-          const address = response.results[0].formatted_address;
-          setPartyLocation(address);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+      
       //const handleChange = (event) => setPartyL(event.target.value);
 
       const{currentUser} = useContext(AuthContext);
@@ -92,9 +84,21 @@ const Create = () =>{
         setDirectionsResponse(results)
         setDistance(results.routes[0].legs[0].distance.text)
         setDuration(results.routes[0].legs[0].duration.text)
-        setPartyLocation(destiantionRef.current.value)
+
         
-        console.log(partyLocation);
+
+        Geocode.fromAddress(destiantionRef.current.value).then(
+            (response) => {
+              const { lat, lng } = response.results[0].geometry.location;
+              center.lat = lat;
+              center.lng = lng;
+              
+            },
+            (error) => {
+              console.error(error);
+            }
+        );
+        setPartyLocation(center)
       }
     
       function clearRoute() {
@@ -130,7 +134,8 @@ const Create = () =>{
                 Description,
                 Attending,
                 Wanted,
-                Location,
+                Lattitude:center.lat,
+                longitude:center.lng,
 
                 
                 
@@ -249,7 +254,7 @@ const Create = () =>{
                 <label for="Title" >Title:</label>
                 <input required id="Title" name="Title"/>
                 <label for="Description" >Description:</label>
-                <textarea rows="5" cols="40" id="Description" name="Description" placeholder="Enter text"/>
+                <textarea rows="5" width="100%" id="Description" name="Description" placeholder="Enter text"/>
                 <label for="attendingCount" >
                     How many people do you have coming so far:
                     <select required id='attendingCount' name="attendingCount">

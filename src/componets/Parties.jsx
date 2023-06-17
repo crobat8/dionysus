@@ -1,10 +1,10 @@
 import React,{ useState,useContext, useEffect } from "react";
 import {  db  } from "../firebase";
-import { collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { collection, query, where, getDocs} from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 
-import Maps from "./Maps"
-import { GoogleMap, useJsApiLoader } from "@react-google-maps/api";
+
+import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 
 const Parties = () =>{ 
     const { isLoaded } = useJsApiLoader({
@@ -64,6 +64,7 @@ const Parties = () =>{
                 {parties.map((e)=>{
                     
                     var center = {lat: e.data.Lattitude, lng: e.data.Longitude}
+                    //var me = 
                     return(
                         <article className="party" >
                             <h2>
@@ -85,7 +86,7 @@ const Parties = () =>{
                                     }}
                                     onLoad={map => setMap(map)}
                                 >
-
+                                    <Marker position={center} />
                                 </GoogleMap> 
                             </div>
                             <p>

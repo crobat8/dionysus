@@ -2,8 +2,8 @@ $darkColor1: #00618c;
 $darkColor2: #04222b;
 $lightColor1: #00aabb;
 $lightColor2: #00b2be;
-$usedgray:#202020;
-
+$usedgray1:#202020;
+$usedgray2:#e0e0e0;
 
 * {    
     margin: 0 ;
@@ -34,13 +34,13 @@ $usedgray:#202020;
                     border-color: $lightColor1;
                 }
                 button:hover{
-                    background-color: $usedgray;
+                    background-color: $usedgray1;
                     
                 }
             }
         }
         .page{
-            background-color: $usedgray;
+            background-color: $usedgray1;
 
             padding: 20px;
 
@@ -74,6 +74,10 @@ $usedgray:#202020;
                         border-radius: 20px;
                         width: 80%;
                         padding: 10px;
+                        background-color: $darkColor2;
+                        color: $usedgray2;
+                    }
+                    .party:hover{
                         background-color: $darkColor1;
                     }
                 }

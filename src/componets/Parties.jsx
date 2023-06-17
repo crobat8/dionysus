@@ -4,7 +4,20 @@ import { collection, query, where, getDocs} from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 
 
-import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+
+var me = {lat: 48.8584, lng: 2.2945}
+
+if ("geolocation" in navigator) {
+  navigator.geolocation.getCurrentPosition(function(position) {
+      
+      me.lat=position.coords.latitude;
+
+      me.lng=position.coords.longitude
+    });
+} else {
+  console.log("Not Available");
+}
 
 const Parties = () =>{ 
     const { isLoaded } = useJsApiLoader({
@@ -62,9 +75,9 @@ const Parties = () =>{
             </div>
             <div className='right'>
                 {parties.map((e)=>{
-                    
+                    console.log(e)
                     var center = {lat: e.data.Lattitude, lng: e.data.Longitude}
-                    //var me = 
+                    //const personIcon = "https://developers.google.com/maps/documentation/javascript/examples/full/images/info-i_maps.png";
                     return(
                         <article className="party" >
                             <h2>
@@ -76,7 +89,7 @@ const Parties = () =>{
                             <div style={{ "height" : "70%" , "width" : "100%"}}>
                                 <GoogleMap
                                     center={center}
-                                    zoom={14}
+                                    zoom={15}
                                     mapContainerStyle={{ width: '100%', height: '100%' }}
                                     options={{
                                         zoomControl: false,
@@ -86,7 +99,13 @@ const Parties = () =>{
                                     }}
                                     onLoad={map => setMap(map)}
                                 >
-                                    <Marker position={center} />
+                                    <MarkerF 
+                                    position={center} 
+                                    />
+                                    <MarkerF 
+                                    position={me} 
+                                    />
+
                                 </GoogleMap> 
                             </div>
                             <p>

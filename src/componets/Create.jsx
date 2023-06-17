@@ -121,13 +121,9 @@ const Create = () =>{
         const Attending = e.target[3].value;
         const Wanted = e.target[4].value;
         const Location = partyLocation;
-
-
-        
-        
         try{
             
-            await setDoc(doc(db, "Event", currentUser.uid), {
+            await setDoc(doc(db, "Event", currentUser.uid+"test6"), {
                 uid: currentUser.uid,
                 EventType,
                 Title,
@@ -135,9 +131,7 @@ const Create = () =>{
                 Attending,
                 Wanted,
                 Lattitude:center.lat,
-                longitude:center.lng,
-
-                
+                Longitude:center.lng,
                 
               });
               alert("event was succesfully added");

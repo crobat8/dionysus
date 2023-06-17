@@ -14,7 +14,6 @@ $usedgray:#202020;
             img{
             margin: auto;
             max-height: 75px;
-            
             }
             background-color: black ;
             display: grid;
@@ -29,7 +28,7 @@ $usedgray:#202020;
                     margin-right: 5px;
                     height: 50px;
                     width: 100px;
-                    border-radius: 15%;
+                    border-radius: 20%;
                     background-color: black;
                     color: $lightColor1;
                     border-color: $lightColor1;
@@ -42,17 +41,59 @@ $usedgray:#202020;
         }
         .page{
             background-color: $usedgray;
-            padding-bottom: 20px;
+
+            padding: 20px;
+
+            .Parties{
+                display: grid;
+                grid-template-columns: 1fr 2fr ;
+                min-height: 800px;
+                .left{
+                    background-color: $lightColor2;
+                   height: 800px;
+                    margin-right: 20px;
+                    border-radius: 20px;
+                    h2{
+                        text-align: center;
+                        padding-top: 20px;
+                    }
+                }
+                .right{
+                    background-color: $lightColor2;
+                    height: 800px;
+                    border-radius: 20px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    overflow: hidden;
+                    overflow-y:scroll;
+                    
+
+                    .party{
+                        height: 400px;
+                        margin: auto;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                        border-radius: 20px;
+                        width: 80%;
+                        padding: 10px;
+                        background-color: $darkColor1;
+                    }
+                }
+                .right::-webkit-scrollbar{
+                    display: none;
+                }
+            }
+
             .create{
                 
                 .Form{
                     margin-left: auto;
                     margin-right: auto;
-                    background-color: #00b2be;
+                    background-color: $lightColor2;
                     text-align: center;
                     align-items: center;
                     width: 50%;
-                    border-radius: 15%;
+                    border-radius: 20px;
                     padding: 15px;
                     
                     select{

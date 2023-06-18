@@ -50,7 +50,7 @@ $usedgray2:#e0e0e0;
                 min-height: 800px;
                 .left{
                     background-color: $lightColor2;
-                   height: 800px;
+                    min-height: 800px;
                     margin-right: 20px;
                     border-radius: 20px;
                     h2{
@@ -62,27 +62,47 @@ $usedgray2:#e0e0e0;
                     background-color: $lightColor2;
                     height: 800px;
                     border-radius: 20px;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    overflow: hidden;
-                    overflow-y:scroll;
-                    .party{
-                        height: 400px;
-                        margin: auto;
-                        margin-top: 10px;
-                        margin-bottom: 10px;
-                        border-radius: 20px;
-                        width: 80%;
-                        padding: 10px;
-                        background-color: $darkColor2;
+                    
+                    .map{
+                        height: 40%;
+                        width: 90%;
+                        padding: 5%;
+                        border-style: solid;
+                    }
+                    table {
+                        width: 100%;
+                        
+                    }
+                    
+                    
+                    thead, tbody, tr {
+                        display: table;
+                        width: 100%;
+                        table-layout: fixed;
+                        text-align: center;
                         color: $usedgray2;
                     }
-                    .party:hover{
-                        background-color: $darkColor1;
+                    tr:hover{
+                        background-color: $darkColor2;
                     }
-                }
-                .right::-webkit-scrollbar{
-                    display: none;
+                    .header:hover{
+                        background-color: $lightColor2;
+                    }
+                    tbody {
+                        display: block;
+                        overflow: auto;
+                        table-layout: fixed;
+                        max-height: 375px;
+                    }
+                    tbody::-webkit-scrollbar {
+                        width: 10px;
+                    }
+                    
+                    tbody::-webkit-scrollbar-thumb {
+                        background-color: $usedgray2;    /* color of the scroll thumb */
+                        border-radius: 20px;       /* roundness of the scroll thumb */
+                          
+                   }
                 }
             }
 

@@ -6,7 +6,8 @@ import Create from '../componets/Create';
 import Friends from '../componets/Friends';
 
 import logo from '../img/partyuplogo.png'
-
+import { auth } from '../firebase'
+import {signOut} from "firebase/auth"
 //import Chat from "../componets/Chat";
 
 const Home = () =>{ 
@@ -45,12 +46,10 @@ const Home = () =>{
                         Friends
                     </button>
                 </ul>
-                <div>
-
+                <div className='logout'>
+                    <button onClick={()=>signOut(auth)}>logout</button>
                 </div>
-                {
-                    //logout button goes here
-                }
+                
                 
             </header>
             <main className="page">

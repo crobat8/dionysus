@@ -38,6 +38,18 @@ $usedgray2:#e0e0e0;
                     
                 }
             }
+            .logout{
+                margin: auto;
+                button{
+                    height: 50px;
+                    width: 100px;
+                    border-radius: 20%;
+                    background-color:$lightColor1 ;
+                    color: black;
+                    border-color: $lightColor1;
+                }
+                
+            }
         }
         .page{
             background-color: $usedgray1;
@@ -46,7 +58,7 @@ $usedgray2:#e0e0e0;
 
             .Parties{
                 display: grid;
-                grid-template-columns: 1fr 2fr ;
+                //grid-template-columns: 1fr 2fr ;
                 min-height: 800px;
                 .left{
                     background-color: $lightColor2;
@@ -67,7 +79,7 @@ $usedgray2:#e0e0e0;
                         height: 40%;
                         width: 90%;
                         padding: 5%;
-                        border-style: solid;
+                        
                     }
                     table {
                         width: 100%;
@@ -83,8 +95,9 @@ $usedgray2:#e0e0e0;
                         color: $usedgray2;
                     }
                     tr:hover{
-                        background-color: $darkColor2;
+                        background-color: $darkColor1;
                     }
+
                     .header:hover{
                         background-color: $lightColor2;
                     }

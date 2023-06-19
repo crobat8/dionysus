@@ -85,8 +85,6 @@ const Create = () =>{
         setDistance(results.routes[0].legs[0].distance.text)
         setDuration(results.routes[0].legs[0].duration.text)
 
-        
-
         Geocode.fromAddress(destiantionRef.current.value).then(
             (response) => {
               const { lat, lng } = response.results[0].geometry.location;
@@ -123,7 +121,7 @@ const Create = () =>{
         const Location = partyLocation;
         try{
             
-            await setDoc(doc(db, "Event", currentUser.uid+"test6"), {
+            await setDoc(doc(db, "Event", currentUser.uid), {
                 uid: currentUser.uid,
                 EventType,
                 Title,
@@ -243,40 +241,20 @@ const Create = () =>{
                         <option value="Corn Hole">Corn Hole</option>
                     </select>
                 </label>
-
-                
                 <label for="Title" >Title:</label>
                 <input required id="Title" name="Title"/>
                 <label for="Description" >Description:</label>
                 <textarea rows="5" width="100%" id="Description" name="Description" placeholder="Enter text"/>
                 <label for="attendingCount" >
                     How many people do you have coming so far:
-                    <select required id='attendingCount' name="attendingCount">
-                        <option value="0">0</option>
-                        <option value="1" selected="selected">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="6+">6+</option>
-
-                    </select>
                 </label>
+                <input className='attendingCount' id='attendingCount' type='number'></input>
+
                 <label for="attendingWanted" >
                     How many people do you have coming so far:
-                    <select required id='attendingWanted' name="attendingWanted">
-                        <option value="0">0</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="6+" selected="selected">6+</option>
-
-                    </select>
                 </label>
+                <input className='attendingWanted' id='attendingWanted' type='number'></input>
+
                 <button>Log</button>
 
             </form>

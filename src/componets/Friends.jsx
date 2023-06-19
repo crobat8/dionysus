@@ -94,7 +94,7 @@ const Friends = () =>{
                 {err && <span>User not found!</span>}
                 {user && (
                     <div className="add" >
-                        <img src={user.photoURL} alt="" />
+                        <img src={user.photoURL} alt="" width={"100%"}/>
                         <div className="userChatInfo">
                             <span>{user.displayName}</span>
                             <button onClick={sendRequest} >

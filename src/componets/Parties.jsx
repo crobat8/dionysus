@@ -1,7 +1,7 @@
-import React,{ useState,useContext, useEffect } from "react";
+import React,{ useState, useEffect } from "react";
 import {  db  } from "../firebase";
 import { collection, query, where, getDocs} from "firebase/firestore";
-import { AuthContext } from "../context/AuthContext";
+//import { AuthContext } from "../context/AuthContext";
 import { doc, updateDoc } from "firebase/firestore";
 import my from "../img/person.png"
 
@@ -26,14 +26,14 @@ const Parties = () =>{
         googleMapsApiKey: 'AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0',
         libraries: ['places'],
     })
-    const{currentUser} = useContext(AuthContext);
+    //const{currentUser} = useContext(AuthContext);
     const [map, setMap] = useState(/** @type google.maps.Map */ (null))
     const [loading,setLoading] =useState(true);
-    const [rangeval, setRangeval] = useState(15);
+    //const [rangeval, setRangeval] = useState(15);
     const [parties,setParties] = useState([]);
-    const [eventSift,setEventSift] = useState("Select Event Type");
-    const [modal,setModal] = useState(false)
-    const [logging,setLogging]=useState(true)
+    //const [eventSift,setEventSift] = useState("Select Event Type");
+    //const [modal,setModal] = useState(false)
+    //const [logging,setLogging]=useState(true)
     //setLoading(false);
     const popupStyle = {
         color: "#e0e0e0",
@@ -60,11 +60,6 @@ const Parties = () =>{
         })
         .catch(error => console.error(error.message))  
         
-        
-    }
-
-    function sleep(ms) {
-        return new Promise(resolve => setTimeout(resolve, ms));
     }
 
     function going(event,i){

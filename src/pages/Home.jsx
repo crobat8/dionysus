@@ -12,7 +12,7 @@ import {signOut} from "firebase/auth"
 
 const Home = () =>{ 
     
-    const [page,setPage] = useState(1);
+    const [page,setPage] = useState(3);
     
     function HandleSwap(){
         

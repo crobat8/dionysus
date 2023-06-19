@@ -48,6 +48,10 @@ $usedgray2:#e0e0e0;
                     color: black;
                     border-color: $lightColor1;
                 }
+                button:hover{
+                    background-color: $lightColor2 ;
+                    
+                }
                 
             }
         }
@@ -169,6 +173,29 @@ $usedgray2:#e0e0e0;
                         height: 30px;
                         width: 200px;
                     }
+                }
+            }
+            .Friends{
+                display: grid;
+                grid-template-columns: 1fr 1fr ;
+                min-height: 800px;
+                .left{
+                    background-color: $lightColor2;
+                    min-height: 800px;
+                    margin-right: 20px;
+                    border-radius: 20px;
+                    h1{
+                        text-align: center;
+                    }
+                }
+                .right{
+                    background-color: $lightColor2;
+                    height: 800px;
+                    border-radius: 20px;
+                    h1{
+                        text-align: center;
+                    }
+                    
                 }
             } 
         }

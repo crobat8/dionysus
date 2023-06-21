@@ -4,15 +4,17 @@ import Navbar from '../componets/Navbar';
 import Parties from '../componets/Parties';
 import Create from '../componets/Create';
 import Friends from '../componets/Friends';
+import Test from '../componets/test'
 
 import logo from '../img/partyuplogo.png'
 import { auth } from '../firebase'
 import {signOut} from "firebase/auth"
+
 //import Chat from "../componets/Chat";
 
 const Home = () =>{ 
     
-    const [page,setPage] = useState(3);
+    const [page,setPage] = useState(0);
     
     function HandleSwap(){
         
@@ -22,6 +24,8 @@ const Home = () =>{
             return <Create/>
         }else if(page === 3){
             return <Friends/>
+        }else if(page === 4){
+            return <Test/>
         }else {
             return null;
         }
@@ -44,6 +48,9 @@ const Home = () =>{
                     </button>
                     <button onClick={()=>setPage(3)}>
                         Friends
+                    </button>
+                    <button onClick={()=>setPage(4)}>
+                       Test
                     </button>
                 </ul>
                 <div className='logout'>

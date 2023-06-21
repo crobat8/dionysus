@@ -1,4 +1,4 @@
-import React,{ useState, useEffect } from "react";
+import React,{ useState, useEffect, useContext } from "react";
 import {  db  } from "../firebase";
 import { collection, query, where, getDocs} from "firebase/firestore";
 //import { AuthContext } from "../context/AuthContext";
@@ -7,6 +7,7 @@ import my from "../img/person.png"
 
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import Popup from 'reactjs-popup';
+import { AuthContext } from "../context/AuthContext";
 
 var me = {lat: 48.8584, lng: 2.2945}
 
@@ -26,7 +27,7 @@ const Parties = () =>{
         googleMapsApiKey: 'AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0',
         libraries: ['places'],
     })
-    //const{currentUser} = useContext(AuthContext);
+    const{currentUser} = useContext(AuthContext);
     const [map, setMap] = useState(/** @type google.maps.Map */ (null))
     const [loading,setLoading] =useState(true);
     //const [rangeval, setRangeval] = useState(15);
@@ -71,12 +72,11 @@ const Parties = () =>{
         const partiesRef = doc(db,"Event",parties[i].id)
         updateDoc(partiesRef,{
             Attending:parties[i].data.Attending
-        });
+        })
         
         
-        for(var x=0;x<1000;x++){
-
-        }
+        
+        
         //window.location.reload();
         
     }
@@ -90,21 +90,19 @@ const Parties = () =>{
             is loading
         </h1>
     }else{
-        //console.log(parties);
+        console.log(currentUser);
     }
     
     return (
         <div className="Parties">
-            {
-                /*
+            
                 <div className='left'>
                 <h2>
                     filter
                 </h2>
                 
                 </div>
-                */
-            }
+                
             
             
             <div className='right'>

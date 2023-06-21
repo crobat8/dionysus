@@ -41,6 +41,10 @@ const Register = () => {
               displayName,
               email,
               photoURL: downloadURL,
+              friends:{
+                Jerry:"Jerry"
+                
+              }
             });
 
             //create empty user chats on firestore
@@ -62,7 +66,7 @@ const Register = () => {
   return (
     <div className="formContainer">
       <div className="formWrapper">
-        <span className="logo">Mjolnir Athletics</span>
+        <span className="logo">PartyUp</span>
         <span className="title">Register</span>
         <form onSubmit={handleSubmit}>
           <input required type="text" placeholder="display name" />

@@ -52,6 +52,7 @@ const Create = () =>{
       const [duration, setDuration] = useState('')
 
       const [partyLocation,setPartyLocation] = useState(center);
+      const [submitLoading,setSubmitLoading] = useState(false);
       Geocode.setApiKey("AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0");
       
       //const handleChange = (event) => setPartyL(event.target.value);
@@ -99,25 +100,31 @@ const Create = () =>{
         setPartyLocation(center)
       }
     
-      function clearRoute() {
-        setDirectionsResponse(null)
-        setDistance('')
-        setDuration('')
-        originRef.current.value = ''
-        destiantionRef.current.value = ''
-      }
       
+      function handleLocation(){
+        console.log(destiantionRef.current.value);
+        Geocode.fromAddress(destiantionRef.current.value).then(
+          (response) => {
+            const { lat, lng } = response.results[0].geometry.location;
+            center.lat = lat;
+            center.lng = lng;
+            setPartyLocation(center)
+          },
+          (error) => {
+            console.error(error);
+          }
+      );
+        
+      }
+
       const handleSubmit = async (e) => {
         
-        e.preventDefault();
-        
-        console.log(e)
-
-        const EventType = e.target[0].value;
-        const Title = e.target[1].value;
-        const Description = e.target[2].value;
-        const Wanted = e.target[3].value;
+        const EventType = e.target[1].value;
+        const Title = e.target[2].value;
+        const Description = e.target[3].value;
+        const Wanted = e.target[4].value;
         const Location = partyLocation;
+        console.log(Location)
         try{
             
             await setDoc(doc(db, "Event", currentUser.uid), {
@@ -131,6 +138,7 @@ const Create = () =>{
                 Wanted,
                 Lattitude:center.lat,
                 Longitude:center.lng,
+                Location,
                 
               });
               alert("event was succesfully added");
@@ -172,68 +180,18 @@ const Create = () =>{
                 )}
                 </GoogleMap>
             </Box>
-          <Box
-            p={4}
-            borderRadius='lg'
-            m={4}
-            bgColor='white'
-            shadow='base'
-            minW='container.md'
-            zIndex='1'
-          >
-            <HStack spacing={2} justifyContent='space-between'>
-              <Box flexGrow={1}>
-                <Autocomplete>
-                  <Input 
-                  className='comingFrom'
-                  type='text' 
-                  placeholder='where are you coming from' 
-                  ref={originRef}
-                  width='250px'
-                  
-                  />
-                </Autocomplete>
-              </Box>
-              <Box flexGrow={1}>
-                <Autocomplete>
+            </Flex>
+            <form className="Form" onSubmit={handleSubmit}>
+              <Autocomplete onPlaceChanged={handleLocation}>
                   <Input
                     className='goingTo'
                     type='text'
                     placeholder='where is the hangout going to be'
                     ref={destiantionRef}
                     width='250px'
+                    required
                   />
                 </Autocomplete>
-              </Box>
-    
-              <ButtonGroup>
-                <Button colorScheme='pink' type='submit' onClick={calculateRoute}>
-                  Calculate Route
-                </Button>
-                <IconButton
-                  aria-label='center back'
-                  icon={<FaTimes />}
-                  onClick={clearRoute}
-                />
-              </ButtonGroup>
-            </HStack>
-            <HStack spacing={4} mt={4} justifyContent='space-between'>
-              <Text>Distance: {distance} </Text>
-              <Text>Duration: {duration} </Text>
-              <IconButton
-                aria-label='center back'
-                icon={<FaLocationArrow />}
-                isRound
-                onClick={() => {
-                  map.panTo(center)
-                  map.setZoom(15)
-                }}
-              />
-            </HStack>
-          </Box>
-          
-            </Flex>
-            <form className="Form" onSubmit={handleSubmit}>
                 <label for="Event" >
                     Event Type:
                     <select required id='EventType' name="EventType">

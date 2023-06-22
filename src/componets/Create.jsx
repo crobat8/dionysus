@@ -116,17 +116,18 @@ const Create = () =>{
         const EventType = e.target[0].value;
         const Title = e.target[1].value;
         const Description = e.target[2].value;
-        const Attending = e.target[3].value;
-        const Wanted = e.target[4].value;
+        const Wanted = e.target[3].value;
         const Location = partyLocation;
         try{
             
             await setDoc(doc(db, "Event", currentUser.uid), {
-                uid: currentUser.uid,
+                comingList:{
+                  [currentUser.uid]:currentUser.uid
+                },
+                id:currentUser.uid,
                 EventType,
                 Title,
                 Description,
-                Attending,
                 Wanted,
                 Lattitude:center.lat,
                 Longitude:center.lng,
@@ -245,11 +246,6 @@ const Create = () =>{
                 <input required id="Title" name="Title"/>
                 <label for="Description" >Description:</label>
                 <textarea rows="5" width="100%" id="Description" name="Description" placeholder="Enter text"/>
-                <label for="attendingCount" >
-                    How many people do you have coming so far:
-                </label>
-                <input className='attendingCount' id='attendingCount' type='number'></input>
-
                 <label for="attendingWanted" >
                     How many people do you have coming so far:
                 </label>

@@ -30,18 +30,11 @@ const Test = () =>{
     const [loading,setLoading] =useState(true);
     const [parties,setParties] = useState([]);
     
-
-    
-        const colRef =collection(db,"Event")
-        onSnapshot(colRef,(snapshot)=>{
-            
-            setParties(snapshot.docs.map(doc=>doc.data()))
-            
-            setLoading(false);
-        })
-        
-        
-    
+    const colRef =collection(db,"Event")
+    onSnapshot(colRef,(snapshot)=>{
+        setParties(snapshot.docs.map(doc=>doc.data()))
+        setLoading(false);
+    })
     
     if(loading){
         return <h1>
@@ -63,7 +56,7 @@ const Test = () =>{
             
             <div className='right'>
             {parties.map((e,i)=>{
-                
+                console.log(e)
                 return(
                 <div>
                     <h1>

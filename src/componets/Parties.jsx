@@ -2,7 +2,7 @@ import React,{ useState, useEffect, useContext } from "react";
 import {  db  } from "../firebase";
 import { collection, query, where, getDocs} from "firebase/firestore";
 //import { AuthContext } from "../context/AuthContext";
-import { doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot } from "firebase/firestore";
 import my from "../img/person.png"
 
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
@@ -45,52 +45,27 @@ const Parties = () =>{
         
     }
     
-    function getParties(){
-        
-        const partiesCollectionRef = collection(db,"Event")
-        const sifted =query(partiesCollectionRef
-                      ,where("Lattitude",">",0));
-        getDocs(sifted)
-        .then(response =>{
-            const party = response.docs.map(doc =>({
-                data: doc.data(),
-                id: doc.id,
-            }))
-            setParties(party)
-            setLoading(false)
-        })
-        .catch(error => console.error(error.message))  
-        
-    }
+    const colRef =collection(db,"Event")
+    onSnapshot(colRef,(snapshot)=>{
+        setParties(snapshot.docs.map(doc=>doc.data()))
+        setLoading(false);
+    })
 
     function going(event,i){
-        console.log(parties[i]);
-        console.log(parties[i].data);
-        console.log(parties[i].data.Attending);
-        parties[i].data.Attending++;
-        //var increase = (1+(Number()))
+        var updateKey = 'comingList.'+currentUser.uid
+        console.log(parties[i])
         const partiesRef = doc(db,"Event",parties[i].id)
         updateDoc(partiesRef,{
-            Attending:parties[i].data.Attending
+            [updateKey]:currentUser.uid
         })
-        
-        
-        
-        
-        //window.location.reload();
-        
     }
-
-    useEffect(() => {
-        getParties();
-    },[])
     
     if(loading||!isLoaded){
         return <h1>
             is loading
         </h1>
     }else{
-        console.log(currentUser);
+        //console.log(currentUser);
     }
     
     return (
@@ -125,7 +100,7 @@ const Parties = () =>{
                 
                 {parties.map((e,i)=>{
                     
-                    var Loc = {lat: e.data.Lattitude, lng: e.data.Longitude}
+                    var Loc = {lat: e.Lattitude, lng: e.Longitude}
                     return(
                         <MarkerF 
                             icon={
@@ -160,19 +135,18 @@ const Parties = () =>{
                         </thead>
                         <tbody className="rows">
                             {parties.map((e,i)=>{
-                                
                                 return(
                                 <Popup trigger={
                                 <tr key={i} className="line">
                                     <td>{i}</td>
-                                    <td>{e.data.EventType}</td>
-                                    <td>{e.data.Title}</td>
-                                    <td>{e.data.Attending}</td>
-                                    <td>{e.data.Wanted}</td>
+                                    <td>{e.EventType}</td>
+                                    <td>{e.Title}</td>
+                                    <td>{Object.keys(e.comingList).length}</td>
+                                    <td>{e.Wanted}</td>
                                 </tr> }>
                                     <div style={popupStyle} className="popup">
                                         <p>
-                                            {e.data.Description}
+                                            {e.Description}
                                         </p>
                                         <button onClick={(event)=> going(event,i)}>
                                             I want to go

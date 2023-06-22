@@ -45,6 +45,8 @@ const Parties = () =>{
         
     }
     
+    
+    //const colRef =query(collection(db,"Event"),where("Wanted","==","5"))
     const colRef =collection(db,"Event")
     onSnapshot(colRef,(snapshot)=>{
         setParties(snapshot.docs.map(doc=>doc.data()))

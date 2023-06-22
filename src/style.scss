@@ -40,6 +40,12 @@ $usedgray2:#e0e0e0;
             }
             .logout{
                 margin: auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                h4{
+                    margin: auto;
+                    color: $lightColor1;
+                }
                 button{
                     height: 50px;
                     width: 100px;
@@ -52,6 +58,7 @@ $usedgray2:#e0e0e0;
                     background-color: $lightColor2 ;
                     
                 }
+
                 
             }
         }

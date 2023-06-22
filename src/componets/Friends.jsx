@@ -11,7 +11,8 @@ import {
   getDoc,
   
   deleteField,
-  deleteDoc
+  deleteDoc,
+  onSnapshot
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { AuthContext } from "../context/AuthContext";
@@ -28,7 +29,8 @@ const Friends = () =>{
     const [loading3,setLoading3] =useState(true);
 
     const [requests,setRequests] = useState([]);
-    const [friends,setFriends] =  useState([]);
+    const [myData,setMyData]     = useState([])
+    const [friends,setFriends]   = useState([]);
 
     const handleSearch = async () => {
         const q = query(
@@ -80,65 +82,57 @@ const Friends = () =>{
         }
     }
 
-    function getRequests(){
-        const uid = currentUser.uid
-        console.log(uid)
-        const RequestCollectionRef = collection(db,"Request")
-        const recived =query(RequestCollectionRef
-                      ,where("to","==",currentUser.uid));
-        getDocs(recived)
-        .then(response =>{
-            const quest = response.docs.map(doc =>({
-                data: doc.data(),
-                id: doc.id,
-            }))
-            setRequests(quest)
-            setLoading1(false)
-        })
-        .catch(error => console.error(error.message))  
-        
-    }
+    const requestRef = query(collection(db,"Request")
+                            ,where("to","==",currentUser.uid))
+    onSnapshot(requestRef,(snapshot)=>{
+        setRequests(snapshot.docs.map(doc=>doc.data()))
 
-    function getFriends(){
-        console.log(currentUser);
-        const partiesCollectionRef = collection(db,"users")
-        const friendlist =query(partiesCollectionRef
-                      ,where("uid","==",currentUser.uid));
-        getDocs(friendlist)
-        .then(response =>{
-            const frienddata = response.docs.map(doc =>({
-                data: doc.data(),
-                id: doc.id,
-            }))
-            setFriends(frienddata[0].data.friends);
-            getFriendsData(Object.values(frienddata[0].data.friends));
-            setLoading2(false)
-        })
-        .catch(error => console.error(error.message))  
+        setLoading1(false)
+    })
+    
+    const meRef = query(collection(db,"users")
+                        ,where("uid","==",currentUser.uid))
+    onSnapshot(meRef,(snapshot)=>{
+        setMyData(snapshot.docs.map(doc=>doc.data()))
         
-    }
-    function getFriendsData(temp){
+        setLoading2(false)
+    })
+    if(loading2){
+
+    }else{
+        const friendIds = Object.values(myData[0].friends)
+        const friendsRef = query(collection(db,"users")
+                            ,where("uid","in",friendIds))
+        onSnapshot(friendsRef,(snapshot)=>{
+            setFriends(snapshot.docs.map(doc=>doc.data()))
         
-        const partiesCollectionRef = collection(db,"users")
-        const friendlist =query(partiesCollectionRef
-                      ,where("uid","in",temp));
-        getDocs(friendlist)
-        .then(response =>{
-            const frienddata = response.docs.map(doc =>({
-                data: doc.data(),
-                id: doc.id,
-            }))
-            setFriends(frienddata);
-            console.log(friends)
             setLoading3(false)
-            
         })
-        .catch(error => console.error(error.message))  
     }
-    useEffect(() => {
-        getRequests();
-        getFriends();
-    },[])
+    
+
+    // function getFriendsData(temp){
+        
+    //     const partiesCollectionRef = collection(db,"users")
+    //     const friendlist =query(partiesCollectionRef
+    //                   ,where("uid","in",temp));
+    //     getDocs(friendlist)
+    //     .then(response =>{
+    //         const frienddata = response.docs.map(doc =>({
+    //             data: doc.data(),
+    //             id: doc.id,
+    //         }))
+    //         setFriends(frienddata);
+    //         console.log(friends)
+    //         setLoading3(false)
+            
+    //     })
+    //     .catch(error => console.error(error.message))  
+    // }
+    // useEffect(() => {
+    //     getRequests();
+    //     getFriends();
+    // },[])
 
     const removeRequst = (incomming) =>{
         var requestsearch;
@@ -148,9 +142,7 @@ const Friends = () =>{
             requestsearch = incomming+currentUser.uid
         }
         deleteDoc(doc(db,"Request",requestsearch))
-        .then((e)=>{
-            window.location.reload();
-        })
+        
         
     }
 
@@ -177,6 +169,8 @@ const Friends = () =>{
                 friends Loading
             </h1>
         )
+    }else {
+        
     }
     return (
         <div className="Friends">
@@ -187,15 +181,13 @@ const Friends = () =>{
                 <div className="requests">
                     
                     {requests.map((e,i)=>{
-                        console.log(e);
-                        console.log(Friends);
                         return(
                             <div className="request">
-                                <img src={e.data.fromInfo.photoURL} alt="" />
+                                <img src={e.fromInfo.photoURL} alt="" />
                                 <p>
-                                    {e.data.fromInfo.displayName}
+                                    {e.fromInfo.displayName}
                                 </p>
-                                <button onClick={(event)=>confirm(event,e.data.from)}>
+                                <button onClick={(event)=>confirm(event,e.from)}>
                                     confirm
                                 </button> 
                                 <button>
@@ -214,9 +206,9 @@ const Friends = () =>{
                         console.log(e)
                         return(
                             <div className="person" >
-                                <img src={e.data.photoURL} alt="" />
+                                <img src={e.photoURL} alt="" />
                                 <p>
-                                    {e.data.displayName}
+                                    {e.displayName}
                                 </p>
                             </div>
                         )

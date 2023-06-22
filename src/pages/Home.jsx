@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../componets/Navbar';
 
 import Parties from '../componets/Parties';
@@ -9,13 +9,14 @@ import Test from '../componets/test'
 import logo from '../img/partyuplogo.png'
 import { auth } from '../firebase'
 import {signOut} from "firebase/auth"
+import { AuthContext } from '../context/AuthContext';
 
 //import Chat from "../componets/Chat";
 
 const Home = () =>{ 
     
     const [page,setPage] = useState(0);
-    
+    const{currentUser} = useContext(AuthContext);
     function HandleSwap(){
         
         if(page === 1){
@@ -24,8 +25,6 @@ const Home = () =>{
             return <Create/>
         }else if(page === 3){
             return <Friends/>
-        }else if(page === 4){
-            return <Test/>
         }else {
             return null;
         }
@@ -49,12 +48,14 @@ const Home = () =>{
                     <button onClick={()=>setPage(3)}>
                         Friends
                     </button>
-                    <button onClick={()=>setPage(4)}>
-                       Test
-                    </button>
+                    
                 </ul>
                 <div className='logout'>
+                    <h4>
+                        name:{currentUser.displayName}
+                    </h4>
                     <button onClick={()=>signOut(auth)}>logout</button>
+                    
                 </div>
                 
                 

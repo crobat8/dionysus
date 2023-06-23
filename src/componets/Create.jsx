@@ -70,37 +70,6 @@ const Create = () =>{
         </h1>
       }
     
-      async function calculateRoute() {
-        if (originRef.current.value === '' || destiantionRef.current.value === '') {
-          return
-        }
-        // eslint-disable-next-line no-undef
-        const directionsService = new google.maps.DirectionsService()
-        const results = await directionsService.route({
-          origin: originRef.current.value,
-          destination: destiantionRef.current.value,
-          // eslint-disable-next-line no-undef
-          travelMode: google.maps.TravelMode.DRIVING,
-        })
-        setDirectionsResponse(results)
-        setDistance(results.routes[0].legs[0].distance.text)
-        setDuration(results.routes[0].legs[0].duration.text)
-
-        Geocode.fromAddress(destiantionRef.current.value).then(
-            (response) => {
-              const { lat, lng } = response.results[0].geometry.location;
-              center.lat = lat;
-              center.lng = lng;
-              
-            },
-            (error) => {
-              console.error(error);
-            }
-        );
-        setPartyLocation(center)
-      }
-    
-      
       function handleLocation(){
         console.log(destiantionRef.current.value);
         Geocode.fromAddress(destiantionRef.current.value).then(
@@ -124,10 +93,11 @@ const Create = () =>{
         const Description = e.target[3].value;
         const Wanted = e.target[4].value;
         const Location = partyLocation;
-        console.log(Location)
+
         try{
-            
-            await setDoc(doc(db, "Event", currentUser.uid), {
+
+            setDoc(doc(db, "Event", currentUser.uid), {
+              
                 comingList:{
                   [currentUser.uid]:currentUser.uid
                 },
@@ -143,10 +113,8 @@ const Create = () =>{
               });
               alert("event was succesfully added");
         }catch(err){
-            alert(err)
+            console.log(err)
         }
-
-        
     }
 
 
@@ -181,7 +149,7 @@ const Create = () =>{
             </Box>
             </Flex>
             <form className="Form" onSubmit={handleSubmit}>
-            <label for="goingTo" >Where:</label>
+            
               <Autocomplete onPlaceChanged={handleLocation}>
                   <Input
                     className='goingTo'

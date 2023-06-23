@@ -180,7 +180,7 @@ const Friends = () =>{
                 </h1>
                 <div className="people">
                     {friends.map((e,i)=>{
-                        console.log(e)
+                        
                         return(
                             <div className="person" >
                                 <img src={e.photoURL} alt="" />

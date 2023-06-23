@@ -8,8 +8,22 @@ import my from "../img/person.png"
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 import Popup from 'reactjs-popup';
 import { AuthContext } from "../context/AuthContext";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow
+  } from "@mui/material";
+
 
 var me = {lat: 48.8584, lng: 2.2945}
+
+
 
 if ("geolocation" in navigator) {
   navigator.geolocation.getCurrentPosition(function(position) {
@@ -22,6 +36,7 @@ if ("geolocation" in navigator) {
   console.log("Not Available");
 }
 
+
 const Parties = () =>{ 
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0',
@@ -30,12 +45,9 @@ const Parties = () =>{
     const{currentUser} = useContext(AuthContext);
     const [map, setMap] = useState(/** @type google.maps.Map */ (null))
     const [loading,setLoading] =useState(true);
-    //const [rangeval, setRangeval] = useState(15);
     const [parties,setParties] = useState([]);
-    //const [eventSift,setEventSift] = useState("Select Event Type");
-    //const [modal,setModal] = useState(false)
-    //const [logging,setLogging]=useState(true)
-    //setLoading(false);
+    const [choseSlide,setChoseSlide] =useState(0);
+
     const popupStyle = {
         color: "#e0e0e0",
         backgroundColor: "#202020",
@@ -44,27 +56,53 @@ const Parties = () =>{
         width:"200px",
         
     }
+     
+    function handleSlide(x){
+        console.log(x)
+        setChoseSlide(x.i);
+    }
     
     
-    //const colRef =query(collection(db,"Event"),where("Wanted","==","5"))
-    const colRef =collection(db,"Event")
-    onSnapshot(colRef,(snapshot)=>{
-        setParties(snapshot.docs.map(doc=>doc.data()))
-        setLoading(false);
-    })
+    function getParties(){
+        const colRef =collection(db,"Event")
+        onSnapshot(colRef,(snapshot)=>{
+            setParties(snapshot.docs.map(doc=>doc.data()))
+            setLoading(false);
+        })
 
+    }
+    
     function going(event,i){
         var updateKey = 'comingList.'+currentUser.uid
         console.log(parties[i])
-        const partiesRef = doc(db,"Event",parties[i].id)
+        const partiesRef = doc(db,"Event",parties[i-1].id)
         updateDoc(partiesRef,{
             [updateKey]:currentUser.uid
         })
     }
     
+    function DropDown (props){
+        var event = props.information;
+        var i = props.number
+        if(choseSlide == i){
+            return(
+                
+                <div  className="slideDown" style={{overflow:"hide",height:"100px"}} >
+                <p>
+                    {event.Description}
+                </p>
+                <button onClick={(event)=> going(event,i)}>
+                    I want to go
+                </button>
+                </div>
+            )
+        }
+    }
+
     if(loading||!isLoaded){
+        getParties();
         return <h1>
-            is loading
+            
         </h1>
     }else{
         //console.log(currentUser);
@@ -101,7 +139,7 @@ const Parties = () =>{
                 >
                 
                 {parties.map((e,i)=>{
-                    
+                    i=i+1;
                     var Loc = {lat: e.Lattitude, lng: e.Longitude}
                     return(
                         <MarkerF 
@@ -125,6 +163,8 @@ const Parties = () =>{
 
                 </GoogleMap>
                 </div>
+                
+                
                 <table class="table" >
                         <thead>
                             <tr className="header">
@@ -137,30 +177,25 @@ const Parties = () =>{
                         </thead>
                         <tbody className="rows">
                             {parties.map((e,i)=>{
+                                i=i+1
                                 return(
-                                <Popup trigger={
-                                <tr key={i} className="line">
-                                    <td>{i}</td>
-                                    <td>{e.EventType}</td>
-                                    <td>{e.Title}</td>
-                                    <td>{Object.keys(e.comingList).length}</td>
-                                    <td>{e.Wanted}</td>
-                                </tr> }>
-                                    <div style={popupStyle} className="popup">
-                                        <p>
-                                            {e.Description}
-                                        </p>
-                                        <button onClick={(event)=> going(event,i)}>
-                                            I want to go
-                                        </button>
-                                    </div>
-                                </Popup>     
+                                <div  className="FullParty" onClick={() => handleSlide({i})}>
+                                    <tr key={i} className="line" >
+                                        <td>{i}</td>
+                                        <td>{e.EventType}</td>
+                                        <td>{e.Title}</td>
+                                        <td>{Object.keys(e.comingList).length}</td>
+                                        <td>{e.Wanted}</td>
+                                    </tr> 
+                                    <DropDown information={e} number={i}></DropDown> 
+                                    
+                                </div>
                             )
                             })}
                             
                         </tbody>
                         
-                    </table>
+                    </table> 
                    
             </div>
             

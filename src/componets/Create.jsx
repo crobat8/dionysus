@@ -195,9 +195,12 @@ const Create = () =>{
                 <label for="Event" >
                     Event Type:
                     <select required id='EventType' name="EventType">
-                        <option value="BasketBall">BasketBall</option>
+                        <option value="Sports">Sports</option>
                         <option value="House Party">House Party</option>
-                        <option value="Corn Hole">Corn Hole</option>
+                        <option value="Yard Games">Yard Games</option>
+                        <option value="Hit The Town">Hit The Town</option>
+                        <option value="Video Games">Video Games</option>
+                        <option value="Board Games">Board Games</option>
                     </select>
                 </label>
                 <label for="Title" >Title:</label>
@@ -205,7 +208,7 @@ const Create = () =>{
                 <label for="Description" >Description:</label>
                 <textarea rows="5" width="100%" id="Description" name="Description" placeholder="Enter text"/>
                 <label for="attendingWanted" >
-                    How many people do you have coming so far:
+                    How many people do you want to have come:
                 </label>
                 <input className='attendingWanted' id='attendingWanted' type='number'></input>
 

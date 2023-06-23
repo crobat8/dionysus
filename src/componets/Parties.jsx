@@ -1,24 +1,14 @@
 import React,{ useState, useEffect, useContext } from "react";
 import {  db  } from "../firebase";
-import { collection, query, where, getDocs} from "firebase/firestore";
-//import { AuthContext } from "../context/AuthContext";
-import { doc, updateDoc, onSnapshot } from "firebase/firestore";
+import {  query, where, getDocs} from "firebase/firestore";
+
+import { collection, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import my from "../img/person.png"
 
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
-import Popup from 'reactjs-popup';
+
 import { AuthContext } from "../context/AuthContext";
-import {
-    Accordion,
-    AccordionDetails,
-    AccordionSummary,
-    Table,
-    TableBody,
-    TableCell,
-    TableContainer,
-    TableHead,
-    TableRow
-  } from "@mui/material";
+
 
 
 var me = {lat: 48.8584, lng: 2.2945}
@@ -84,7 +74,7 @@ const Parties = () =>{
     function DropDown (props){
         var event = props.information;
         var i = props.number
-        if(choseSlide == i){
+        if(choseSlide === i){
             return(
                 
                 <div  className="slideDown" style={{overflow:"hide",height:"100px"}} >

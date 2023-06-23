@@ -174,14 +174,14 @@ const Create = () =>{
                     }}
                     onLoad={map => setMap(map)}
                 >
+                  
                 <Marker position={center} />
-                {directionsResponse && (
-                <DirectionsRenderer directions={directionsResponse} />
-                )}
+                
                 </GoogleMap>
             </Box>
             </Flex>
             <form className="Form" onSubmit={handleSubmit}>
+            <label for="goingTo" >Where:</label>
               <Autocomplete onPlaceChanged={handleLocation}>
                   <Input
                     className='goingTo'

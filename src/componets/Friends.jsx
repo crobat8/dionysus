@@ -111,29 +111,6 @@ const Friends = () =>{
     }
     
 
-    // function getFriendsData(temp){
-        
-    //     const partiesCollectionRef = collection(db,"users")
-    //     const friendlist =query(partiesCollectionRef
-    //                   ,where("uid","in",temp));
-    //     getDocs(friendlist)
-    //     .then(response =>{
-    //         const frienddata = response.docs.map(doc =>({
-    //             data: doc.data(),
-    //             id: doc.id,
-    //         }))
-    //         setFriends(frienddata);
-    //         console.log(friends)
-    //         setLoading3(false)
-            
-    //     })
-    //     .catch(error => console.error(error.message))  
-    // }
-    // useEffect(() => {
-    //     getRequests();
-    //     getFriends();
-    // },[])
-
     const removeRequst = (incomming) =>{
         var requestsearch;
         if(incomming>currentUser.uid){

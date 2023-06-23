@@ -97,7 +97,6 @@ $usedgray2:#e0e0e0;
                         
                     }
                     
-                    
                     thead, tbody, tr {
                         display: table;
                         width: 100%;
@@ -125,7 +124,22 @@ $usedgray2:#e0e0e0;
                     tbody::-webkit-scrollbar-thumb {
                         background-color: $usedgray2;    /* color of the scroll thumb */
                         border-radius: 20px;       /* roundness of the scroll thumb */
-                          
+                   }
+                   .rows{
+                        .FullParty{
+                            .slideDown{
+                                display: grid;
+                                grid-template-columns: 1fr 2fr ;
+                                height: fit-content;
+                                p{
+                                    margin: auto;
+                                }
+                                button{
+                                    margin: auto;
+                                }
+                                background-color: $darkColor1;
+                            }
+                        }
                    }
                 }
             }

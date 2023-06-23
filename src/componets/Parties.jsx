@@ -64,7 +64,7 @@ const Parties = () =>{
     
     function going(event,i){
         var updateKey = 'comingList.'+currentUser.uid
-        console.log(parties[i])
+        console.log(parties[i-1])
         const partiesRef = doc(db,"Event",parties[i-1].id)
         updateDoc(partiesRef,{
             [updateKey]:currentUser.uid
@@ -78,12 +78,12 @@ const Parties = () =>{
             return(
                 
                 <div  className="slideDown" style={{overflow:"hide",height:"100px"}} >
-                <p>
-                    {event.Description}
-                </p>
-                <button onClick={(event)=> going(event,i)}>
-                    I want to go
-                </button>
+                    <p>
+                        {event.Description}
+                    </p>
+                    <button onClick={(event)=> going(event,i)}>
+                        I want to go
+                    </button>
                 </div>
             )
         }

@@ -41,7 +41,7 @@ const Friends = () =>{
         try {
           const querySnapshot = await getDocs(q);
           
-          querySnapshot.forEach((doc) => {
+            querySnapshot.forEach((doc) => {
             setUser(doc.data());
             
           });

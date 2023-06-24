@@ -59,9 +59,8 @@ const Parties = () =>{
             setParties(snapshot.docs.map(doc=>doc.data()))
             setLoading(false);
         })
-
     }
-    
+
     function going(event,i){
         var updateKey = 'comingList.'+currentUser.uid
         console.log(parties[i-1])
@@ -84,6 +83,7 @@ const Parties = () =>{
                     <button onClick={(event)=> going(event,i)}>
                         I want to go
                     </button>
+
                 </div>
             )
         }

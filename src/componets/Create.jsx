@@ -158,7 +158,7 @@ const Create = () =>{
             </Box>
             </Flex>
             <form className="Form" onSubmit={handleSubmit}>
-              
+            <label for="goingTo"  >Where is the party:</label>
               <Autocomplete onPlaceChanged={handleLocation}>
                   <Input
                     id="goingTo"

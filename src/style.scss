@@ -11,6 +11,11 @@ $usedgray2:#e0e0e0;
     .home{
         
         .topBar{
+            background-color: rgb(22 22 23/80%);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
             img{
             margin: auto;
             max-height: 75px;
@@ -126,7 +131,7 @@ $usedgray2:#e0e0e0;
                         border-radius: 20px;       /* roundness of the scroll thumb */
                    }
                    .rows{
-                        .FullParty{
+                        .line{
                             .slideDown{
                                 display: grid;
                                 grid-template-columns: 1fr 2fr ;

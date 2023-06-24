@@ -24,7 +24,8 @@ import { AuthContext } from "../context/AuthContext";
 import Geocode from "react-geocode";
 
   //default location aka paris
-  var center = {lat: 48.8584, lng: 2.2945}
+
+var center = {lat: 48.8584, lng: 2.2945}
 
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -38,13 +39,14 @@ import Geocode from "react-geocode";
   }
 
 
-
 const Create = () =>{ 
+  
 
     const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: 'AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0',
         libraries: ['places'],
-      })
+    })
+
       const [screen,setScreen] =useState(window.innerWidth/4)
       const [map, setMap] = useState(/** @type google.maps.Map */ (null))
       const [directionsResponse, setDirectionsResponse] = useState(null)
@@ -94,34 +96,41 @@ const Create = () =>{
         const Wanted = e.target[4].value;
         const Location = partyLocation;
 
+        console.log(currentUser.uid)
+        console.log(EventType)
+        console.log(Title)
+        console.log(Description)
+        console.log(Wanted)
+        console.log(Location)
+
         try{
 
-            setDoc(doc(db, "Event", currentUser.uid), {
+          setDoc(doc(db, "Event", currentUser.uid), {
+            
+              comingList:{
+                [currentUser.uid]:currentUser.uid
+              },
+              id:currentUser.uid,
+              EventType,
+              Title,
+              Description,
+              Wanted,
+              Lattitude:center.lat,
+              Longitude:center.lng,
+              Location,
               
-                comingList:{
-                  [currentUser.uid]:currentUser.uid
-                },
-                id:currentUser.uid,
-                EventType,
-                Title,
-                Description,
-                Wanted,
-                Lattitude:center.lat,
-                Longitude:center.lng,
-                Location,
-                
-              });
-              alert("event was succesfully added");
-        }catch(err){
-            console.log(err)
-        }
+            });
+            e.preventDefault();
+      }catch(err){
+          console.log(err)
+      }
+
     }
 
 
       return (
         <div className='create'>
             <Flex
-          
                 flexDirection='column'
                 alignItems='center'
                 h='700px'
@@ -149,9 +158,10 @@ const Create = () =>{
             </Box>
             </Flex>
             <form className="Form" onSubmit={handleSubmit}>
-            
+              
               <Autocomplete onPlaceChanged={handleLocation}>
                   <Input
+                    id="goingTo"
                     className='goingTo'
                     type='text'
                     placeholder='where is the hangout going to be'

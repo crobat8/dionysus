@@ -117,7 +117,7 @@ const Parties = () =>{
                 <GoogleMap
                     
                     center={me}
-                    zoom={5}
+                    zoom={10}
                     mapContainerStyle={{ width: '100%', height: '100%' }}
                     options={{
                         zoomControl: false,
@@ -169,8 +169,8 @@ const Parties = () =>{
                             {parties.map((e,i)=>{
                                 i=i+1
                                 return(
-                                <div  className="FullParty" onClick={() => handleSlide({i})}>
-                                    <tr key={i} className="line" >
+                                <div  className="FullParty" >
+                                    <tr key={i} className="line" onClick={() => handleSlide({i})}>
                                         <td>{i}</td>
                                         <td>{e.EventType}</td>
                                         <td>{e.Title}</td>

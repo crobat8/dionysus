@@ -78,8 +78,6 @@ const Parties = () =>{
 
     function convertIdToName(Crossed){
         var retArray= [];
-        console.log(Crossed)
-        console.log(friends)
 
         for (let i = 0; i <Crossed.length; i++) {
             for (let j = 0; j < friends.length; j++) {
@@ -127,22 +125,18 @@ const Parties = () =>{
         var event = props.information;
         var i = props.number
         var coming = props.coming
-
         if(choseSlide === i){
             return(
-                
-                <div  className="slideDown" style={{overflow:"hide",height:"100px"}} >
+                <div  className="slideDown" style={{overflow:"hide"}} >
                     <p>
                         {event.Description}
                     </p>
-                    <button onClick={(event)=> going(event,i)}>
-                        I want to go
-                    </button>
+                    
                     <div className="peopleComing">
-                    {coming.map((e)=>{
-                            //used to find crossover between friends and who is coming to the party
-
-                                
+                        <h3>
+                            friends coming:
+                        </h3>
+                    {coming.map((e)=>{ 
                             return(
                             <div  className="Person" >
                                 {e}
@@ -151,6 +145,10 @@ const Parties = () =>{
                         )
                     })}
                     </div>
+                    <button onClick={(event)=> going(event,i)}>
+                        I want to go
+                    </button>
+
                 </div>
             )
         }
@@ -242,19 +240,36 @@ const Parties = () =>{
                                 var crossOver = IdCrossover(friendIds,comingIds);
                                 var disNames = convertIdToName(crossOver)
                                 i=i+1
-                                return(
-                                <div  className="FullParty" >
-                                    <tr key={i} className="line" onClick={() => handleSlide({i})}>
-                                        <td>{i}</td>
-                                        <td>{e.EventType}</td>
-                                        <td>{e.Title}</td>
-                                        <td>{Object.keys(e.comingList).length}</td>
-                                        <td>{e.Wanted}</td>
-                                    </tr> 
-                                    <DropDown information={e} number={i} coming={disNames}></DropDown> 
-                                    
-                                </div>
-                            )
+                                if(i === choseSlide){
+                                    return(
+                                        <div  className="FullParty" style={{backgroundColor:"#00618c"}}>
+                                            <tr key={i} className="line" onClick={() => handleSlide({i})}>
+                                                <td>{i}</td>
+                                                <td>{e.EventType}</td>
+                                                <td>{e.Title}</td>
+                                                <td>{Object.keys(e.comingList).length}</td>
+                                                <td>{e.Wanted}</td>
+                                            </tr> 
+                                            <DropDown information={e} number={i} coming={disNames}></DropDown> 
+                                        
+                                        </div>
+                                    )
+                                }else{
+                                    return(
+                                        <div  className="FullParty" >
+                                            <tr key={i} className="line" onClick={() => handleSlide({i})}>
+                                                <td>{i}</td>
+                                                <td>{e.EventType}</td>
+                                                <td>{e.Title}</td>
+                                                <td>{Object.keys(e.comingList).length}</td>
+                                                <td>{e.Wanted}</td>
+                                            </tr> 
+                                            <DropDown information={e} number={i} coming={disNames}></DropDown> 
+
+                                        </div>
+                                    )
+                                }
+                                
                             })}
                             
                         </tbody>

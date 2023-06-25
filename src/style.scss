@@ -115,6 +115,7 @@ $usedgray2:#e0e0e0;
 
                     .header:hover{
                         background-color: $lightColor2;
+                        border-radius: 10px;
                     }
                     tbody {
                         display: block;
@@ -130,9 +131,16 @@ $usedgray2:#e0e0e0;
                         background-color: $usedgray2;    /* color of the scroll thumb */
                         border-radius: 20px;       /* roundness of the scroll thumb */
                    }
-                   .rows{
+                   .rows{ 
                         .FullParty{
+                            padding: 10px;
+                            border-radius: 10px;
+                            .line{
+                                border-radius: 10px;
+                                
+                            }
                             .slideDown{
+                                padding-top: 10px;
                                 display: grid;
                                 grid-template-columns: 1fr 1fr 1fr;
                                 height: fit-content;

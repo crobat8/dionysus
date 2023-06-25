@@ -140,17 +140,24 @@ $usedgray2:#e0e0e0;
                                 
                             }
                             .slideDown{
-                                padding-top: 10px;
-                                display: grid;
-                                grid-template-columns: 1fr 1fr 1fr;
-                                height: fit-content;
-                                p{
-                                    margin: auto;
+
+                                .partyInfo{
+                                    padding-top: 10px;
+                                    display: grid;
+                                    grid-template-columns: 1fr 1fr 1fr;
+                                    height: fit-content;
+                                    p{
+                                        margin: auto;
+                                    }
+                                    button{
+                                        margin: auto;
+                                    }
+                                    background-color: $darkColor1;
                                 }
-                                button{
-                                    margin: auto;
+                                .partyChat{
+                                    
                                 }
-                                background-color: $darkColor1;
+                                
                             }
                         }
                    }
@@ -209,6 +216,7 @@ $usedgray2:#e0e0e0;
                     }
                 }
             }
+
             .Friends{
                 display: grid;
                 grid-template-columns: 1fr 1fr ;

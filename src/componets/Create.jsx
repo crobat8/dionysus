@@ -10,15 +10,15 @@ import {
     Input,
     Text,
   } from '@chakra-ui/react'
-  import { FaLocationArrow, FaTimes } from 'react-icons/fa'
-  import {
+
+import {
     useJsApiLoader,
     GoogleMap,
     MarkerF,
     Autocomplete,
     DirectionsRenderer,
-  } from '@react-google-maps/api'
-  import {  db  } from "../firebase";
+} from '@react-google-maps/api'
+import {  db  } from "../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { AuthContext } from "../context/AuthContext";
 import Geocode from "react-geocode";
@@ -96,15 +96,18 @@ const Create = () =>{
         const Wanted = e.target[4].value;
         const Location = partyLocation;
 
-        console.log(currentUser.uid)
-        console.log(EventType)
-        console.log(Title)
-        console.log(Description)
-        console.log(Wanted)
-        console.log(Location)
-
         try{
+          let date = await new Date().getTime();
 
+          /*
+            date = date.toString();
+            const day= new Date();
+            let text = day.toString();
+            const result = text.substring(0,15);
+            const saveSpot = result +" " + currentUser.uid +" Disc"
+          */
+         
+          //console.log(date)
           setDoc(doc(db, "Event", currentUser.uid), {
             
               comingList:{

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react';
-import Navbar from '../componets/Navbar';
+
 
 import Parties from '../componets/Parties';
 import Create from '../componets/Create';
 import Friends from '../componets/Friends';
-import Test from '../componets/test'
+
 
 import logo from '../img/partyuplogo.png'
 import { auth } from '../firebase'

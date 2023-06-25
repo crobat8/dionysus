@@ -8,6 +8,7 @@ import my from "../img/person.png"
 import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
 
 import { AuthContext } from "../context/AuthContext";
+import PartyChat from "./PartyChat";
 
 
 
@@ -123,6 +124,7 @@ const Parties = () =>{
     
     function DropDown (props){
         var event = props.information;
+        console.log(event);
         var i = props.number
         var coming = props.coming
         if(choseSlide === i){
@@ -151,7 +153,7 @@ const Parties = () =>{
                         </button>
                     </div>
                     <div className="partyChat">
-                        
+                        <PartyChat event={event}/>
                     </div>
 
                 </div>
@@ -210,6 +212,7 @@ const Parties = () =>{
                             position={Loc} 
                             key={i}
                             
+                            onClick={() => handleSlide({i})}
                             label={i.toString()}
                         >
                            

@@ -128,26 +128,31 @@ const Parties = () =>{
         if(choseSlide === i){
             return(
                 <div  className="slideDown" style={{overflow:"hide"}} >
-                    <p>
-                        {event.Description}
-                    </p>
-                    
-                    <div className="peopleComing">
-                        <h3>
-                            friends coming:
-                        </h3>
-                    {coming.map((e)=>{ 
-                            return(
-                            <div  className="Person" >
-                                {e}
-                                    
-                            </div>
-                        )
-                    })}
+                    <div className="partyInfo">
+                        <p>
+                            {event.Description}
+                        </p>
+                        
+                        <div className="peopleComing">
+                            <h3>
+                                friends coming:
+                            </h3>
+                        {coming.map((e)=>{ 
+                                return(
+                                <div  className="Person" >
+                                    {e}
+                                        
+                                </div>
+                            )
+                        })}
+                        </div>
+                        <button onClick={(event)=> going(event,i)}>
+                            I want to go
+                        </button>
                     </div>
-                    <button onClick={(event)=> going(event,i)}>
-                        I want to go
-                    </button>
+                    <div className="partyChat">
+                        
+                    </div>
 
                 </div>
             )

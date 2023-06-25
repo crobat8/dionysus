@@ -97,6 +97,7 @@ const Friends = () =>{
         
         setLoading2(false)
     })
+    
     if(loading2){
 
     }else{

@@ -14,7 +14,7 @@ import {
   import {
     useJsApiLoader,
     GoogleMap,
-    Marker,
+    MarkerF,
     Autocomplete,
     DirectionsRenderer,
   } from '@react-google-maps/api'
@@ -120,7 +120,9 @@ const Create = () =>{
               Location,
               
             });
+            alert("event was succesfully added")
             e.preventDefault();
+            
       }catch(err){
           console.log(err)
       }
@@ -140,8 +142,8 @@ const Create = () =>{
             <Box mt={20} left={screen} top={100} h='600px' w='80%'>
             
                 <GoogleMap
-                    center={center}
-                    zoom={15}
+                    center={partyLocation}
+                    zoom={10}
                     mapContainerStyle={{ width: '100%', height: '100%' }}
                     options={{
                         zoomControl: false,
@@ -151,8 +153,18 @@ const Create = () =>{
                     }}
                     onLoad={map => setMap(map)}
                 >
-                  
-                <Marker position={center} />
+                
+                    <MarkerF 
+                            icon={
+                                StyleSheet
+                            }
+                            position={partyLocation} 
+                            
+                            
+                            
+                        >
+                           
+                        </MarkerF> 
                 
                 </GoogleMap>
             </Box>

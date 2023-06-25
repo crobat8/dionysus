@@ -15,7 +15,7 @@ import { AuthContext } from '../context/AuthContext';
 
 const Home = () =>{ 
     
-    const [page,setPage] = useState(0);
+    const [page,setPage] = useState(2);
     const{currentUser} = useContext(AuthContext);
     function HandleSwap(){
         

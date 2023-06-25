@@ -35,8 +35,12 @@ const Parties = () =>{
     const{currentUser} = useContext(AuthContext);
     const [map, setMap] = useState(/** @type google.maps.Map */ (null))
     const [loading,setLoading] =useState(true);
+    const [loading2,setLoading2] =useState(true);
+    const [loading3,setLoading3] =useState(true);
     const [parties,setParties] = useState([]);
     const [choseSlide,setChoseSlide] =useState(0);
+    const [myData,setMyData]     = useState([])
+    const [friends,setFriends]   = useState([]);
 
     const popupStyle = {
         color: "#e0e0e0",
@@ -48,11 +52,22 @@ const Parties = () =>{
     }
      
     function handleSlide(x){
-        console.log(x)
         setChoseSlide(x.i);
     }
     
-    
+    function IdCrossover(array1,array2){
+        var retArray = [];
+        for (let i = 0; i < array1.length; i++) {
+            for (let j = 0; j < array2.length; j++) {
+                if (array1[i] === array2[j]) {
+                    retArray.push(array1[i]);
+                    
+                }
+            }
+        }
+        return retArray;
+    }
+
     function getParties(){
         const colRef =collection(db,"Event")
         onSnapshot(colRef,(snapshot)=>{
@@ -61,9 +76,47 @@ const Parties = () =>{
         })
     }
 
+    function convertIdToName(Crossed){
+        var retArray= [];
+        console.log(Crossed)
+        console.log(friends)
+
+        for (let i = 0; i <Crossed.length; i++) {
+            for (let j = 0; j < friends.length; j++) {
+                if (Crossed[i] === friends[j].uid) {
+                    retArray.push(friends[j].displayName);
+                }
+            }
+        }
+        return retArray;
+
+    }
+
+    function getMe(){
+        const meRef = query(collection(db,"users")
+        ,where("uid","==",currentUser.uid))
+        onSnapshot(meRef,(snapshot)=>{
+        setMyData(snapshot.docs.map(doc=>doc.data()))
+
+        setLoading2(false)
+        })
+
+        if(loading2){
+
+        }else{
+        const friendIds = Object.values(myData[0].friends)
+        const friendsRef = query(collection(db,"users")
+                    ,where("uid","in",friendIds))
+        onSnapshot(friendsRef,(snapshot)=>{
+        setFriends(snapshot.docs.map(doc=>doc.data()))
+
+        setLoading3(false)
+        })
+        }
+    }
+
     function going(event,i){
         var updateKey = 'comingList.'+currentUser.uid
-        console.log(parties[i-1])
         const partiesRef = doc(db,"Event",parties[i-1].id)
         updateDoc(partiesRef,{
             [updateKey]:currentUser.uid
@@ -73,6 +126,8 @@ const Parties = () =>{
     function DropDown (props){
         var event = props.information;
         var i = props.number
+        var coming = props.coming
+
         if(choseSlide === i){
             return(
                 
@@ -83,16 +138,29 @@ const Parties = () =>{
                     <button onClick={(event)=> going(event,i)}>
                         I want to go
                     </button>
+                    <div className="peopleComing">
+                    {coming.map((e)=>{
+                            //used to find crossover between friends and who is coming to the party
 
+                                
+                            return(
+                            <div  className="Person" >
+                                {e}
+                                    
+                            </div>
+                        )
+                    })}
+                    </div>
                 </div>
             )
         }
     }
 
-    if(loading||!isLoaded){
+    if(loading||!isLoaded||loading2||loading3){
         getParties();
+        getMe();
         return <h1>
-            
+            Loading
         </h1>
     }else{
         //console.log(currentUser);
@@ -154,7 +222,6 @@ const Parties = () =>{
                 </GoogleMap>
                 </div>
                 
-                
                 <table class="table" >
                         <thead>
                             <tr className="header">
@@ -167,6 +234,13 @@ const Parties = () =>{
                         </thead>
                         <tbody className="rows">
                             {parties.map((e,i)=>{
+                                //used to find crossover between friends and who is coming to the party
+                                var friendIds =Object.values(myData[0].friends)
+
+                                var comingIds =Object.values(e.comingList)
+
+                                var crossOver = IdCrossover(friendIds,comingIds);
+                                var disNames = convertIdToName(crossOver)
                                 i=i+1
                                 return(
                                 <div  className="FullParty" >
@@ -177,7 +251,7 @@ const Parties = () =>{
                                         <td>{Object.keys(e.comingList).length}</td>
                                         <td>{e.Wanted}</td>
                                     </tr> 
-                                    <DropDown information={e} number={i}></DropDown> 
+                                    <DropDown information={e} number={i} coming={disNames}></DropDown> 
                                     
                                 </div>
                             )

@@ -168,7 +168,7 @@ const Friends = () =>{
                                 <button onClick={(event)=>confirm(event,e.from)}>
                                     confirm
                                 </button> 
-                                <button>
+                                <button onClick={()=>removeRequst(e.from)}>
                                     delete
                                 </button> 
                             </div>

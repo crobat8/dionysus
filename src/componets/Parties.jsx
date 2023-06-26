@@ -120,6 +120,7 @@ const Parties = () =>{
         updateDoc(partiesRef,{
             [updateKey]:currentUser.uid
         })
+        alert("added you to the going list")
     }
     
     function DropDown (props){
@@ -130,9 +131,15 @@ const Parties = () =>{
             return(
                 <div  className="slideDown" style={{overflow:"hide"}} >
                     <div className="partyInfo">
-                        <p>
-                            {event.Description}
-                        </p>
+                        <div>
+                            <h3>
+                                Description: 
+                            </h3>
+                            <p>
+                                {event.Description}
+                            </p>
+                            
+                        </div>
                         
                         <div className="peopleComing">
                             <h3>
@@ -148,7 +155,7 @@ const Parties = () =>{
                         })}
                         </div>
                         <button onClick={(event)=> going(event,i)}>
-                            I want to go
+                            GOING
                         </button>
                     </div>
                     <div className="partyChat">
@@ -302,7 +309,7 @@ const Parties = () =>{
                                                 <td>{Object.keys(e.comingList).length}</td>
                                                 <td>{e.Wanted}</td>
                                             </tr> 
-                                            <DropDown information={e} number={i} coming={disNames}></DropDown> 
+                                            
 
                                         </div>
                                     )

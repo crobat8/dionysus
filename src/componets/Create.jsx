@@ -202,7 +202,7 @@ const Create = () =>{
                 <label for="attendingWanted" >
                     How many people do you want to have come:
                 </label>
-                <input className='attendingWanted' id='attendingWanted' type='number'></input>
+                <input className='attendingWanted' id='attendingWanted' type='number' min={1}></input>
 
                 <button>Log</button>
 

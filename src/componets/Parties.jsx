@@ -40,7 +40,7 @@ const Parties = () =>{
     const [loading3,setLoading3] =useState(true);
     const [parties,setParties] = useState([]);
     const [choseSlide,setChoseSlide] =useState(0);
-    const [myData,setMyData]     = useState([])
+    const [myData,setMyData]     = useState([]);
     const [friends,setFriends]   = useState([]);
 
     const popupStyle = {
@@ -93,7 +93,7 @@ const Parties = () =>{
 
     function getMe(){
         const meRef = query(collection(db,"users")
-        ,where("uid","==",currentUser.uid))
+            ,where("uid","==",currentUser.uid))
         onSnapshot(meRef,(snapshot)=>{
         setMyData(snapshot.docs.map(doc=>doc.data()))
 
@@ -124,7 +124,6 @@ const Parties = () =>{
     
     function DropDown (props){
         var event = props.information;
-        console.log(event);
         var i = props.number
         var coming = props.coming
         if(choseSlide === i){

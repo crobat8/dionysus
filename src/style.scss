@@ -4,6 +4,7 @@ $lightColor1: #00aabb;
 $lightColor2: #00b2be;
 $usedgray1:#202020;
 $usedgray2:#e0e0e0;
+$usedgray3:#a0a0a0;
 
 * {    
     margin: 0 ;
@@ -90,7 +91,7 @@ $usedgray2:#e0e0e0;
                     background-color: $lightColor2;
                     height: 800px;
                     border-radius: 20px;
-                    
+                    padding: 5px;
                     .map{
                         height: 40%;
                         width: 90%;
@@ -130,7 +131,7 @@ $usedgray2:#e0e0e0;
                     tbody::-webkit-scrollbar-thumb {
                         background-color: $usedgray2;    /* color of the scroll thumb */
                         border-radius: 20px;       /* roundness of the scroll thumb */
-                   }
+                    }
                    .rows{ 
                         .FullParty{
                             padding: 10px;
@@ -155,7 +156,95 @@ $usedgray2:#e0e0e0;
                                     background-color: $darkColor1;
                                 }
                                 .partyChat{
-                                    height: 100px;
+                                    border:5px solid black;
+                                    
+                                    .fullChat{
+                                        padding:5px;
+                                        background-color: $usedgray1;
+                                        
+                                        
+                                        .messageHolder{
+                                            overflow: auto;
+                                            max-height: 300px;
+                                            .mychat{
+                                                max-width: 70%;
+                                                background-color: $lightColor1;
+                                                text-align: right;
+                                                width: fit-content;
+                                                margin-right: 10px;
+                                                margin-left: auto;
+                                                margin-top: 10px;
+                                                margin-bottom: 10px;
+                                                padding: 5px;
+                                                border-radius: 10px 10px 0px 10px;
+                                            }
+                                            .theychat{
+                                                background-color: $usedgray3;
+                                                text-align: left;
+                                                max-width: 70%;
+                                                width: fit-content;
+                                                margin-right: auto;
+                                                margin-left: 10px;
+                                                margin-top: 10px;
+                                               
+                                                padding: 5px;
+                                                border-radius: 10px 10px 10px 0px;
+                                            }
+                                            .sentMarker{
+                                                
+                                                text-align: left;
+                                                max-width: 70%;
+                                                width: fit-content;
+                                                margin-right: auto;
+                                                margin-left: 10px;
+                                                
+                                                margin-bottom: 10px;
+                                                padding: 5px;
+                                                border-radius: 10px 10px 10px 0px;
+                                            }
+                                        }
+                                        .chatInput{
+                                            
+                                            align-items: center;
+                                            input {
+                                                min-height: 50px;
+                                                max-width: 150px;
+                                                padding: 0 1rem;
+                                                color: $usedgray2;
+                                                font-size: 15px;
+                                                border: 1px solid $lightColor1;
+                                                border-radius: 6px 0 0 6px;
+                                                background-color: transparent;
+                                            }
+                                            button {
+                                                min-height: 50px;
+                                                padding: .5em 1em;
+                                                border: none;
+                                                border-radius: 0 6px 6px 0;
+                                                background-color: $lightColor1;
+                                                color: $usedgray2;
+                                                font-size: 15px;
+                                                cursor: pointer;
+                                                transition: background-color .3s ease-in-out;
+                                            }
+                                            button:hover {
+                                                background-color: $darkColor1;
+                                            }
+                                            input:focus, input:focus-visible {
+                                                border-color: $darkColor1;
+                                                outline: none;
+                                            }
+                                            
+                                        }
+                                    }
+                                    ::-webkit-scrollbar {
+                                        width: 10px;
+                                    }
+                                    
+                                    ::-webkit-scrollbar-thumb {
+                                        background-color: $usedgray2;    /* color of the scroll thumb */
+                                        border-radius: 20px;       /* roundness of the scroll thumb */
+                                    }
                                 }
                                 
                             }

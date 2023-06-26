@@ -340,7 +340,7 @@ $usedgray3:#a0a0a0;
                     .people{
                         .person{
                             display: grid;
-                            grid-template-columns: 1fr 2fr;
+                            grid-template-columns: 1fr 2fr 1fr;
                             height: 100px;
                             img{
                                 object-fit: cover;
@@ -352,7 +352,11 @@ $usedgray3:#a0a0a0;
                                 border-radius: 50%;
                             }
                             p{
-
+                                margin: auto;
+                            }
+                            button{
+                                margin: auto;
+                                margin-right: 10px;
                             }
                         }
                     }

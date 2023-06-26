@@ -16,11 +16,11 @@ const ChatInput = (props) =>{
       let date = await new Date().getTime();
 
       setDoc(doc(db, "Chats", date+currentUser.uid), {
-          date,
-          text,
-          sentBy,
-          id,
-          sentName,
+        date,
+        text,
+        sentBy,
+        id,
+        sentName,
       });
       e.preventDefault();
       console.log(e.target[0].value)
@@ -30,12 +30,13 @@ const ChatInput = (props) =>{
     }
 
   }
-    return(
-        <form className='chatInput' onSubmit={handleSubmit}>
-            <input required id="TextInput" name="TextInput" placeholder='Message'/>
-            <button>Send</button>
-        </form>
-        
-    )
+
+  return(
+    <form className='chatInput' onSubmit={handleSubmit}>
+      <input required id="TextInput" name="TextInput" placeholder='Message'/>
+      <button>Send</button>
+    </form>
+      
+  )
 }
  export default ChatInput;

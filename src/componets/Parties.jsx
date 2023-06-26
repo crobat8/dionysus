@@ -201,18 +201,33 @@ const Parties = () =>{
                 >
                 
                 {parties.map((e,i)=>{
+                    console.log(e)
                     i=i+1;
                     var Loc = {lat: e.Lattitude, lng: e.Longitude}
+                    var close =0
                     if(i == choseSlide){
                         return(
+                            <MarkerF 
+                            icon={
+                                StyleSheet
+                            }
+                            position={Loc} 
+                            key={i}
+                            
+                            zIndex={i}
+                            onClick={() => handleSlide({i})}
+                            label={i.toString()}
+                            >
                             <InfoWindowF
                             position={Loc} 
                             key={i}
+                            onCloseClick={(close) => handleSlide({close})}
                             >
                                 <span>
-                                    test
+                                    {e.Address}
                                 </span>
                             </InfoWindowF>
+                            </MarkerF>     
                         )
                     }else{
                         return(
@@ -227,7 +242,7 @@ const Parties = () =>{
                             onClick={() => handleSlide({i})}
                             label={i.toString()}
                             >
-                                
+                            
                             </MarkerF>            
                         )
                     }

@@ -95,9 +95,8 @@ const Create = () =>{
         const Description = e.target[3].value;
         const Wanted = e.target[4].value;
         const Location = partyLocation;
-
+        const Address = destiantionRef.current.value
         try{
-          let date = await new Date().getTime();
 
           /*
             date = date.toString();
@@ -121,7 +120,7 @@ const Create = () =>{
               Lattitude:center.lat,
               Longitude:center.lng,
               Location,
-              
+              Address,
             });
             alert("event was succesfully added")
             e.preventDefault();

@@ -5,7 +5,7 @@ import {  query, where, getDocs} from "firebase/firestore";
 import { collection, doc, updateDoc, onSnapshot } from "firebase/firestore";
 import my from "../img/person.png"
 
-import { GoogleMap, useJsApiLoader, MarkerF } from "@react-google-maps/api";
+import { GoogleMap, useJsApiLoader, MarkerF,InfoWindowF} from "@react-google-maps/api";
 
 import { AuthContext } from "../context/AuthContext";
 import PartyChat from "./PartyChat";
@@ -203,20 +203,36 @@ const Parties = () =>{
                 {parties.map((e,i)=>{
                     i=i+1;
                     var Loc = {lat: e.Lattitude, lng: e.Longitude}
-                    return(
-                        <MarkerF 
+                    if(i == choseSlide){
+                        return(
+                            <InfoWindowF
+                            position={Loc} 
+                            key={i}
+                            >
+                                <span>
+                                    test
+                                </span>
+                            </InfoWindowF>
+                        )
+                    }else{
+                        return(
+                            <MarkerF 
                             icon={
                                 StyleSheet
                             }
                             position={Loc} 
                             key={i}
                             
+                            zIndex={i}
                             onClick={() => handleSlide({i})}
                             label={i.toString()}
-                        >
-                           
-                        </MarkerF>         
-                    )
+                            >
+                                
+                            </MarkerF>            
+                        )
+                    }
+                    
+
                 })}
                 
                 <MarkerF 

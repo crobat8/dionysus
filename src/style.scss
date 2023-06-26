@@ -89,11 +89,12 @@ $usedgray3:#a0a0a0;
                 }
                 .right{
                     background-color: $lightColor2;
-                    height: 800px;
+                    min-height: 800px;
+                    height: fit-content;
                     border-radius: 20px;
                     padding: 5px;
                     .map{
-                        height: 40%;
+                        height: 400px;
                         width: 90%;
                         padding: 5%;
                         
@@ -122,7 +123,7 @@ $usedgray3:#a0a0a0;
                         display: block;
                         overflow: auto;
                         table-layout: fixed;
-                        max-height: 375px;
+                        max-height: 575px;
                     }
                     tbody::-webkit-scrollbar {
                         width: 10px;

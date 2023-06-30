@@ -29,7 +29,13 @@ import {
 
 import { 
   doc, 
-  setDoc 
+  setDoc,
+  getDoc,
+  deleteDoc,
+  collection,
+  query,
+  where,
+  onSnapshot
 } from "firebase/firestore";
 
 import { 
@@ -58,6 +64,8 @@ const Create = () =>{
   const [map, setMap] = useState(/** @type google.maps.Map */ (null))
   const [partyLocation,setPartyLocation] = useState(center);
   const{currentUser} = useContext(AuthContext);
+  const[deleteChats,setDeleteChats] = useState([]);
+  const[loading2,setLoading2] = useState(true)
   Geocode.setApiKey("AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0");
 
   /** @type React.MutableRefObject<HTMLInputElement> */
@@ -65,12 +73,6 @@ const Create = () =>{
   /** @type React.MutableRefObject<HTMLInputElement> */
   const destiantionRef = useRef()
 
-  if (!isLoaded) {
-    return <h1>
-        map is loading
-    </h1>
-  }
-  
   function handleLocation(){
     console.log(destiantionRef.current.value);
     Geocode.fromAddress(destiantionRef.current.value).then(
@@ -86,6 +88,7 @@ const Create = () =>{
     );
   }
 
+
   const handleSubmit = async (e) => {
     
     const EventType = e.target[1].value;
@@ -94,6 +97,7 @@ const Create = () =>{
     const Wanted = e.target[4].value;
     const Location = partyLocation;
     const Address = destiantionRef.current.value
+
     try{
       setDoc(doc(db, "Event", currentUser.uid), {
         comingList:{
@@ -109,12 +113,19 @@ const Create = () =>{
         Location,
         Address,
       });
-      alert("event was succesfully added")
+      console.log(deleteChats);
+      alert("event was succesfully created")
       e.preventDefault();
     }catch(err){
       console.log(err)
     }
 
+  }
+
+  if (!isLoaded) {
+    return <h1>
+        map is loading
+    </h1>
   }
 
   return (

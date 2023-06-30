@@ -78,7 +78,7 @@ const Friends = () =>{
         from:currentUser.uid,
         fromInfo:userHolder,
       });
-      alert("event was succesfully added");
+      alert("Request was succesfully sent");
     }catch(err){
       alert(err)
     }
@@ -86,7 +86,7 @@ const Friends = () =>{
 
   function getRequests(){
     const requestRef = query(collection(db,"Request")
-                        ,where("to","==",currentUser.uid))
+                       ,where("to","==",currentUser.uid))
     onSnapshot(requestRef,(snapshot)=>{
       setRequests(snapshot.docs.map(doc=>doc.data()))
 
@@ -106,7 +106,7 @@ const Friends = () =>{
       const friendIds = Object.values(myData[0].friends)
       const friendsRef = query(collection(db,"users")
                           ,where("uid","in",friendIds))
-      onSnapshot(friendsRef,(snapshot)=>{
+        onSnapshot(friendsRef,(snapshot)=>{
         setFriends(snapshot.docs.map(doc=>doc.data()))
         setLoading3(false)
       })

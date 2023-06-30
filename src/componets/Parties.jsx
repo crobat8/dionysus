@@ -41,9 +41,7 @@ if ("geolocation" in navigator) {
     me.lat=position.coords.latitude;
     me.lng=position.coords.longitude
   });
-  console.log(me)
 } else {
-  console.log("Not Available");
 }
 
 const Parties = () =>{ 
@@ -56,31 +54,34 @@ const Parties = () =>{
   const [loading,setLoading] =useState(true);
   const [loading2,setLoading2] =useState(true);
   const [loading3,setLoading3] =useState(true);
+  const [loading4,setLoading4] =useState(false);
   const [parties,setParties] = useState([]);
   const [choseSlide,setChoseSlide] =useState(0);
   const [myData,setMyData]     = useState([]);
   const [friends,setFriends]   = useState([]);
   const [milesSlider,setmilesSlider] =useState(10);
-  const [genreFilter,setGenreFilter] =useState(["test"]);
+  const [genreFilter,setGenreFilter] =useState(["Sports","House Party","Yard Games","Hit The Town","Video Games","Board Games"]);
   
   function arrayRemove(genre,value){
     return genre != value
   }
 
   function handleGenre(input){
-    console.log(input)
     var value = input.target.value
-    console.log(value)
     if(input.target.checked){
-      setGenreFilter([...genreFilter,{value}])
-      
+      setGenreFilter([...genreFilter,value])
     }else{
-      console.log(value)
-      setGenreFilter(genreFilter.filter(genre => genre.value != value))
-      
+      const index = genreFilter.indexOf(value);
+      const holderArray = genreFilter
+      if(index>-1){
+        holderArray.splice(index,1)
+      }
+      setGenreFilter(holderArray);
+
     }
-    //
-    console.log(genreFilter)
+
+    getParties();
+    
   }
 
   function handleRange(input){
@@ -104,16 +105,13 @@ const Parties = () =>{
   }
 
   function getParties(){
-    console.log(genreFilter)
-    const colRef =query(collection(db,"Event")
-                  ,where("EventType","in",genreFilter.value)
-                  )
+    const colRef =collection(db,"Event")
     onSnapshot(colRef,(snapshot)=>{
       setParties(snapshot.docs.map(doc=>doc.data()))
       setLoading(false);
     })
   }
-
+  
   function convertIdToName(Crossed){
     var retArray= [];
     for (let i = 0; i <Crossed.length; i++) {
@@ -216,7 +214,7 @@ const Parties = () =>{
         <h2>
           filter
         </h2>
-        <div className="range">
+        {/* <div className="range">
           <input 
             id="distance"
             className="distance" 
@@ -230,7 +228,7 @@ const Parties = () =>{
           <p>
             search range: {milesSlider} miles
           </p> 
-        </div>
+        </div> */}
         
         <div className="events">
         
@@ -246,6 +244,7 @@ const Parties = () =>{
                 value="Sports"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -261,6 +260,7 @@ const Parties = () =>{
                 value="House Party"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -276,6 +276,7 @@ const Parties = () =>{
                 value="Yard Games"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -291,6 +292,7 @@ const Parties = () =>{
                 value="Hit The Town"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -306,6 +308,7 @@ const Parties = () =>{
                 value="Video Games"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -321,6 +324,7 @@ const Parties = () =>{
                 value="Board Games"
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
+                defaultChecked={true}
               />
               <label
                 className="form-check-label"
@@ -329,14 +333,6 @@ const Parties = () =>{
               </label>
             </div>
           </form>
-          {genreFilter.map((e)=>{
-            
-            return(
-              <p>
-                {e.value}
-              </p>
-            )
-          })}
         </div>
       </div>
       <div className='right'>
@@ -357,43 +353,45 @@ const Parties = () =>{
               i=i+1;
               var Loc = {lat: e.Lattitude, lng: e.Longitude}
               var close = 0
-              if(i == choseSlide){
-                return(
-                  <MarkerF 
-                  icon={
-                    StyleSheet
-                  }
-                  position={Loc} 
-                  key={i}
-                  zIndex={75}
-                  onClick={() => handleDropDown({i})}
-                  label={i.toString()}
-                  >
-                    <InfoWindowF
-                      position={Loc} 
-                      key={i}
-                      onCloseClick={(close) => handleDropDown({close})}
+              if(genreFilter.includes(e.EventType)){
+                if(i == choseSlide){
+                  return(
+                    <MarkerF 
+                    icon={
+                      StyleSheet
+                    }
+                    position={Loc} 
+                    key={i}
+                    zIndex={75}
+                    onClick={() => handleDropDown({i})}
+                    label={i.toString()}
                     >
-                      <span>
-                        {e.Address}
-                      </span>
-                    </InfoWindowF>
-                  </MarkerF>     
-                )
-              }else{
-                return(
-                  <MarkerF 
-                  icon={
-                    StyleSheet
-                  }
-                  position={Loc} 
-                  key={i}
-                  zIndex={i}
-                  onClick={() => handleDropDown({i})}
-                  label={i.toString()}
-                  >
-                  </MarkerF>            
-                )
+                      <InfoWindowF
+                        position={Loc} 
+                        key={i}
+                        onCloseClick={(close) => handleDropDown({close})}
+                      >
+                        <span>
+                          {e.Address}
+                        </span>
+                      </InfoWindowF>
+                    </MarkerF>     
+                  )
+                }else{
+                  return(
+                    <MarkerF 
+                    icon={
+                      StyleSheet
+                    }
+                    position={Loc} 
+                    key={i}
+                    zIndex={i}
+                    onClick={() => handleDropDown({i})}
+                    label={i.toString()}
+                    >
+                    </MarkerF>            
+                  )
+                }
               }
             })}
             <MarkerF 
@@ -421,33 +419,36 @@ const Parties = () =>{
               var crossOver = IdCrossover(friendIds,comingIds);
               var disNames = convertIdToName(crossOver)
               i=i+1
-              if(i === choseSlide){
-                return(
-                  <div  className="FullParty" style={{backgroundColor:"#00618c"}}>
-                    <tr key={i} className="line" onClick={() => handleDropDown({i})}>
-                      <td>{i}</td>
-                      <td>{e.EventType}</td>
-                      <td>{e.Title}</td>
-                      <td>{Object.keys(e.comingList).length}</td>
-                      <td>{e.Wanted}</td>
-                    </tr> 
-                    <DropDown information={e} number={i} coming={disNames}>
-                    </DropDown> 
-                  </div>
-                )
-              }else{
-                return(
-                  <div  className="FullParty" >
-                    <tr key={i} className="line" onClick={() => handleDropDown({i})}>
-                      <td>{i}</td>
-                      <td>{e.EventType}</td>
-                      <td>{e.Title}</td>
-                      <td>{Object.keys(e.comingList).length}</td>
-                      <td>{e.Wanted}</td>
-                    </tr> 
-                  </div>
-                )
+              if(genreFilter.includes(e.EventType)){
+                if(i === choseSlide){
+                  return(
+                    <div  className="FullParty" style={{backgroundColor:"#00618c"}}>
+                      <tr key={i} className="line" onClick={() => handleDropDown({i})}>
+                        <td>{i}</td>
+                        <td>{e.EventType}</td>
+                        <td>{e.Title}</td>
+                        <td>{Object.keys(e.comingList).length}</td>
+                        <td>{e.Wanted}</td>
+                      </tr> 
+                      <DropDown information={e} number={i} coming={disNames}>
+                      </DropDown> 
+                    </div>
+                  )
+                }else{
+                  return(
+                    <div  className="FullParty" >
+                      <tr key={i} className="line" onClick={() => handleDropDown({i})}>
+                        <td>{i}</td>
+                        <td>{e.EventType}</td>
+                        <td>{e.Title}</td>
+                        <td>{Object.keys(e.comingList).length}</td>
+                        <td>{e.Wanted}</td>
+                      </tr> 
+                    </div>
+                  )
+                }
               }
+              
             })}
               
           </tbody>
@@ -458,5 +459,4 @@ const Parties = () =>{
     </div>
   )
 }
-
 export default Parties;

@@ -113,21 +113,45 @@ const Create = () =>{
         Location,
         Address,
       });
-      console.log(deleteChats);
-      alert("event was succesfully created")
       e.preventDefault();
+
+      deleteChats.map((e)=>{
+
+        var num = e.date
+        var str = num.toString()
+        var sentAdded = str+e.sentBy
+        console.log(e)
+        console.log(num);
+        console.log(str);
+        deleteDoc(doc(db,"Chats",sentAdded))
+      });
+
+      
+      alert("event was succesfully created")
+      
     }catch(err){
       console.log(err)
     }
 
   }
 
-  if (!isLoaded) {
+  function getChats(){
+    const meRef = query(collection(db,"Chats")
+                  ,where("id","==",currentUser.uid))
+    onSnapshot(meRef,(snapshot)=>{
+      setDeleteChats(snapshot.docs.map(doc=>doc.data()))
+      setLoading2(false)
+    })
+  }
+
+  
+  if (!isLoaded||loading2) {
+
+    getChats();
     return <h1>
         map is loading
     </h1>
   }
-
   return (
     <div className='create'>
       <Flex

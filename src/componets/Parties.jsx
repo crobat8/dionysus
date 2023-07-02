@@ -235,8 +235,8 @@ const Parties = () =>{
           <h3>
             Event Types:
           </h3>
-          <form >
-            <div>
+          <form className="filterType">
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -245,14 +245,15 @@ const Parties = () =>{
                 id="flexCheckDefault"
                 onChange={(event) => handleGenre(event)}
                 defaultChecked={true}
-              />
+              >
               <label
                 className="form-check-label"
               >
                 Sports
               </label>
+              </input>
             </div>
-            <div>
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -268,7 +269,7 @@ const Parties = () =>{
                 House Party
               </label>
             </div>
-            <div>
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -284,7 +285,7 @@ const Parties = () =>{
                 Yard Games
               </label>
             </div>
-            <div>
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -300,7 +301,7 @@ const Parties = () =>{
                 Hit The Town
               </label>
             </div>
-            <div>
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -316,7 +317,7 @@ const Parties = () =>{
                 Video Games
               </label>
             </div>
-            <div>
+            <div className="checkBoxChunk">
               <input
                 className="form-check-input"
                 type="checkbox"

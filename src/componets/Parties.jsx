@@ -60,11 +60,8 @@ const Parties = () =>{
   const [myData,setMyData]     = useState([]);
   const [friends,setFriends]   = useState([]);
   const [milesSlider,setmilesSlider] =useState(10);
+  const [convertedSlider,setConvertedSlider] = useState(10/69)
   const [genreFilter,setGenreFilter] =useState(["Sports","House Party","Yard Games","Hit The Town","Video Games","Board Games"]);
-  
-  function arrayRemove(genre,value){
-    return genre != value
-  }
 
   function handleGenre(input){
     var value = input.target.value
@@ -84,7 +81,12 @@ const Parties = () =>{
     
   }
 
+  function handleConvertedSlider(input){
+    setConvertedSlider(input/69)
+  }
+
   function handleRange(input){
+    handleConvertedSlider(input)
     setmilesSlider(input )
   }
 
@@ -214,7 +216,10 @@ const Parties = () =>{
         <h2>
           filter
         </h2>
-        {/* <div className="range">
+         <div className="range">
+         <h3>
+            Range:
+          </h3>
           <input 
             id="distance"
             className="distance" 
@@ -228,32 +233,38 @@ const Parties = () =>{
           <p>
             search range: {milesSlider} miles
           </p> 
-        </div> */}
+        </div> 
         
         <div className="events">
         
           <h3>
             Event Types:
           </h3>
-          <form className="filterType">
+           <form className="filterType">
             <div className="checkBoxChunk">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="languages"
-                value="Sports"
-                id="flexCheckDefault"
-                onChange={(event) => handleGenre(event)}
-                defaultChecked={true}
-              >
               <label
                 className="form-check-label"
               >
-                Sports
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="languages"
+                  value="Sports"
+                  id="flexCheckDefault"
+                  onChange={(event) => handleGenre(event)}
+                  defaultChecked={true}
+                />
+                <p>
+                  Sports
+                </p>
+                
               </label>
-              </input>
+              
             </div>
             <div className="checkBoxChunk">
+              <label
+                className="form-check-label"
+              >
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -263,13 +274,14 @@ const Parties = () =>{
                 onChange={(event) => handleGenre(event)}
                 defaultChecked={true}
               />
-              <label
-                className="form-check-label"
-              >
+              
                 House Party
               </label>
             </div>
             <div className="checkBoxChunk">
+              <label
+                className="form-check-label"
+              >
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -279,13 +291,14 @@ const Parties = () =>{
                 onChange={(event) => handleGenre(event)}
                 defaultChecked={true}
               />
-              <label
-                className="form-check-label"
-              >
+              
                 Yard Games
               </label>
             </div>
             <div className="checkBoxChunk">
+              <label
+                className="form-check-label"
+              >
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -295,13 +308,14 @@ const Parties = () =>{
                 onChange={(event) => handleGenre(event)}
                 defaultChecked={true}
               />
-              <label
-                className="form-check-label"
-              >
+              
                 Hit The Town
               </label>
             </div>
             <div className="checkBoxChunk">
+              <label
+                className="form-check-label"
+              >
               <input
                 className="form-check-input"
                 type="checkbox"
@@ -311,29 +325,28 @@ const Parties = () =>{
                 onChange={(event) => handleGenre(event)}
                 defaultChecked={true}
               />
-              <label
-                className="form-check-label"
-              >
+              
                 Video Games
               </label>
             </div>
             <div className="checkBoxChunk">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                name="languages"
-                value="Board Games"
-                id="flexCheckDefault"
-                onChange={(event) => handleGenre(event)}
-                defaultChecked={true}
-              />
               <label
                 className="form-check-label"
               >
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  name="languages"
+                  value="Board Games"
+                  id="flexCheckDefault"
+                  onChange={(event) => handleGenre(event)}
+                  defaultChecked={true}
+                />
+              
                 Board Games
               </label>
             </div>
-          </form>
+          </form> 
         </div>
       </div>
       <div className='right'>
@@ -354,7 +367,14 @@ const Parties = () =>{
               i=i+1;
               var Loc = {lat: e.Lattitude, lng: e.Longitude}
               var close = 0
-              if(genreFilter.includes(e.EventType)){
+              var filterBool = genreFilter.includes(e.EventType)
+
+              var rangeBool = false
+              if((me.lat-e.Lattitude<convertedSlider)&&(me.lng-e.Longitude<convertedSlider)){
+                var rangeBool = true
+              }
+              
+              if(filterBool&&rangeBool){
                 if(i == choseSlide){
                   return(
                     <MarkerF 
@@ -419,8 +439,14 @@ const Parties = () =>{
               var comingIds =Object.values(e.comingList)
               var crossOver = IdCrossover(friendIds,comingIds);
               var disNames = convertIdToName(crossOver)
+              var filterBool = genreFilter.includes(e.EventType)
+
+              var rangeBool = false
+              if((me.lat-e.Lattitude<convertedSlider)&&(me.lng-e.Longitude<convertedSlider)){
+                var rangeBool = true
+              }
               i=i+1
-              if(genreFilter.includes(e.EventType)){
+              if(filterBool&&rangeBool){
                 if(i === choseSlide){
                   return(
                     <div  className="FullParty" style={{backgroundColor:"#00618c"}}>

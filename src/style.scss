@@ -429,10 +429,50 @@ $usedgray3:#a0a0a0;
                 }
             } 
         }
+        
         .information{
-            background-color: green;
+            background-color: black;
             
-            height: 100px;
+            min-height: 100px;
+            color: $usedgray3;
+            .infoTop{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            min-height: 100px;
+            
+                .left{
+                    text-align: center;
+                    h3{
+                        text-align: center;
+                        text-decoration: underline;
+                        margin: 10px;
+                    }
+                    
+                }
+                .middle{
+                    text-align: center;
+                    h3{
+                        
+                        text-align: center;
+                        text-decoration: underline;
+                        margin: 10px;
+                    }
+                }
+                .right{
+                    text-align: center;
+                    h3{
+                        
+                        text-align: center;
+                        text-decoration: underline;
+                        margin: 10px;
+                    }
+                }
+            }
+            .infoBot{
+                text-align: center;
+                
+            }
         }
     }
 }

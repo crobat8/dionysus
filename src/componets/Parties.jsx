@@ -197,10 +197,9 @@ const Parties = () =>{
     }
   }
 
-
   
-
-  if(loading||!isLoaded||loading2||loading3){
+ 
+if(loading||!isLoaded||loading2||loading3){
     getParties();
     getMe();
     return <h1>

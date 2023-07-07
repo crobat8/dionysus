@@ -192,7 +192,7 @@ const Create = () =>{
             id="goingTo"
             className='goingTo'
             type='text'
-            placeholder='where is the hangout going to be'
+            placeholder='where is the hangout at'
             ref={destiantionRef}
             width='250px'
             required

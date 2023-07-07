@@ -26,7 +26,16 @@ const Home = () =>{
         }else if(page === 3){
             return <Friends/>
         }else {
-            return null;
+            return (
+            <div style={{"min-height": "1000px","textAlign":"center"}}>
+                <h1 style={{"backgroundColor":"#00b2be",
+                            "textAlign":"center",
+                            "padding":"20px",
+                            "borderRadius":"20px"}}>
+                    select a page to go to
+                </h1>
+            </div>
+            )
         }
 
     }
@@ -64,9 +73,40 @@ const Home = () =>{
                 <HandleSwap/>
             </main>
             <footer className="information">
-                {
-                    //add stuff to reach moderators here
-                }
+                <div className='infoTop'>
+                    <div className='left'>
+                        <h3>
+                            contact info
+                        </h3>
+                        <span>
+                            partyupcontact@gmail.com
+                        </span>
+                    </div>
+                    <div className='middle'>
+                        <h3>
+                            social media
+                        </h3>
+                        <span>
+                            partyupcontact@gmail.com
+                        </span>
+                    </div>
+                    <div className='right'>
+                        <h3>
+                            Other
+                        </h3>
+                        <span>
+                            partyupcontact@gmail.com
+                        </span>
+                    </div>
+                </div>
+                <div className='infoBot'>
+                    <span className='copy'>
+                        &copy; PartyUp
+                    </span>
+                    
+                </div>
+                
+                
             </footer>
         </div>
     )

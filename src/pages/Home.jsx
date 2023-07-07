@@ -10,13 +10,23 @@ import logo from '../img/partyuplogo.png'
 import { auth } from '../firebase'
 import {signOut} from "firebase/auth"
 import { AuthContext } from '../context/AuthContext';
-
-//import Chat from "../componets/Chat";
+import { 
+    AiFillGithub,
+    AiFillLinkedin,
+    AiFillFacebook,
+    AiFillInstagram 
+} from 'react-icons/ai';
 
 const Home = () =>{ 
     
     const [page,setPage] = useState(0);
     const{currentUser} = useContext(AuthContext);
+    let iconStyles = { color: "#e2f1ff", fontSize: "1.5em" ,padding:"5px"};
+    
+    function review(){
+        alert("we are still working on implementing this")
+    }
+
     function HandleSwap(){
         
         if(page === 1){
@@ -86,17 +96,24 @@ const Home = () =>{
                         <h3>
                             social media
                         </h3>
-                        <span>
-                            partyupcontact@gmail.com
-                        </span>
+                        <div>
+                            <a href="https://www.facebook.com/profile.php?id=100094597923715">
+                                <AiFillFacebook style={iconStyles}/>
+                            </a>
+                            <a href="https://www.instagram.com/partyup.social/">
+                                <AiFillInstagram style={iconStyles}/>
+                            </a>
+                        </div>
+                        
+
                     </div>
                     <div className='right'>
                         <h3>
                             Other
                         </h3>
-                        <span>
-                            partyupcontact@gmail.com
-                        </span>
+                        <button  onClick={()=>review()}>
+                            send us a review
+                        </button>
                     </div>
                 </div>
                 <div className='infoBot'>

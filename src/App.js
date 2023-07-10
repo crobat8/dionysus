@@ -11,6 +11,7 @@ import{
 }from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
+import Landing from "./componets/Landing"
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
 
   const ProtectedRoute = ({children}) =>{
     if(!currentUser){
-      return<Navigate to="/login"/>
+      return<Navigate to="/landing"/>
     }
 
     return children;
@@ -33,8 +34,9 @@ function App() {
               <Home/>
             </ProtectedRoute>}
           />
-          <Route path="login" element={<Login/>}/>
-          <Route path="register" element={<Register/>}/>
+          <Route path="landing" element={<Landing/>}/>
+          {/* <Route path="login" element={<Login/>}/>
+          <Route path="register" element={<Register/>}/> */}
         </Route>
       </Routes>
     </BrowserRouter>

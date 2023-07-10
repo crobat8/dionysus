@@ -5,12 +5,16 @@ import { auth, db, storage } from "../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
-
+import { 
+  AiFillIdcard
+} from 'react-icons/ai';
 const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
+  
+  let iconStylesempty = { color: "#e2f1ff", fontSize: "3em" ,padding:"5px"};
+  let iconStylesfull = { color: "#e2f1ff", fontSize: "3em" ,padding:"5px"};
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -64,7 +68,7 @@ const Register = () => {
   };
 
   return (
-    <div className="formContainer">
+    
       <div className="formWrapper">
         <span className="logo">PartyUp</span>
         <span className="title">Register</span>
@@ -74,18 +78,15 @@ const Register = () => {
           <input required type="password" placeholder="password" />
           <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
-            <img src={Add} alt="" />
+            <AiFillIdcard style={iconStylesempty}/>
             <span>Add an avatar</span>
           </label>
-          <button disabled={loading}>Sign up</button>
+          <button disabled={loading}>Register</button>
           {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong</span>}
         </form>
-        <p>
-          You do have an account? <Link to="/register">Login</Link>
-        </p>
       </div>
-    </div>
+    
   );
 };
 

@@ -119,11 +119,8 @@ const Home = () =>{
                 <div className='infoBot'>
                     <span className='copy'>
                         &copy; PartyUp
-                    </span>
-                    
+                    </span>                 
                 </div>
-                
-                
             </footer>
         </div>
     )

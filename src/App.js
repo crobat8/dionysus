@@ -1,7 +1,5 @@
 import { useContext } from "react";
 import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
 import "./style.scss"
 import{
   BrowserRouter,
@@ -11,7 +9,7 @@ import{
 }from "react-router-dom";
 import { AuthContext } from "./context/AuthContext";
 
-import Landing from "./componets/Landing"
+import Landing from "./pages/Landing"
 
 function App() {
 

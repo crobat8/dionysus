@@ -12,9 +12,17 @@ const Register = () => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  
-  let iconStylesempty = { color: "#e2f1ff", fontSize: "3em" ,padding:"5px"};
+  const [fileName,setFileName] = useState('')
+
+  let iconStylesempty = { color: "#000000", fontSize: "3em" ,padding:"5px"};
   let iconStylesfull = { color: "#e2f1ff", fontSize: "3em" ,padding:"5px"};
+  
+  const saveFile = (e) =>{
+    
+    var partsArray = e.nativeEvent.srcElement.value.split('\\');
+    setFileName(partsArray[partsArray.length -1])
+  }
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -76,11 +84,17 @@ const Register = () => {
           <input required type="text" placeholder="display name" />
           <input required type="email" placeholder="email" />
           <input required type="password" placeholder="password" />
-          <input required style={{ display: "none" }} type="file" id="file" />
           <label htmlFor="file">
-            <AiFillIdcard style={iconStylesempty}/>
-            <span>Add an avatar</span>
+            <div className="profileButton">
+              {fileName ? <AiFillIdcard style={iconStylesfull}/>:<AiFillIdcard style={iconStylesempty}/>}
+              
+              <span>Add an avatar</span>
+            </div>
+
+            <span>{fileName}</span>
           </label>
+          <input required onChange={(e) => saveFile(e)}style={{ display: "none" }} type="file" id="file" />
+          
           <button disabled={loading}>Register</button>
           {loading && "Uploading and compressing the image please wait..."}
           {err && <span>Something went wrong</span>}

@@ -50,6 +50,10 @@ const Home = () =>{
 
     }
     
+    const disableButtonHandler = (x)=>{
+        alert(x)
+    }
+
     return (
         <div className="home">
             <header className="topBar">
@@ -61,12 +65,27 @@ const Home = () =>{
                     <button onClick={()=>setPage(1)}>
                         Parties
                     </button>
+                    {currentUser.uid == "BqJmqRQc2gQnSoHZVwoH8Q99uya2"
+                    ?
+                    <button onClick={()=>disableButtonHandler("Create is diabled on guest account ")}>
+                        Create
+                    </button>
+                    :
                     <button onClick={()=>setPage(2)}>
                         Create
                     </button>
+                    }
+                    
+                    {currentUser.uid == "BqJmqRQc2gQnSoHZVwoH8Q99uya2"
+                    ?
+                    <button onClick={()=>disableButtonHandler("Friends are diabled on guest account ")}>
+                        Friends
+                    </button>
+                    :
                     <button onClick={()=>setPage(3)}>
                         Friends
                     </button>
+                    }
                     
                 </ul>
                 <div className='logout'>

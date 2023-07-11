@@ -24,7 +24,9 @@ const Register = () => {
   }
 
   const handleSubmit = async (e) => {
+    console.log(e)
     setLoading(true);
+    
     e.preventDefault();
     const displayName = e.target[0].value;
     const email = e.target[1].value;
@@ -33,6 +35,7 @@ const Register = () => {
 
     try {
       //Create user
+      console.log("test")
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
       //Create a unique image name
@@ -63,6 +66,7 @@ const Register = () => {
             await setDoc(doc(db, "userChats", res.user.uid), {});
             navigate("/");
           } catch (err) {
+            console.log("test")
             console.log(err);
             setErr(true);
             setLoading(false);
@@ -86,14 +90,14 @@ const Register = () => {
           <input required type="password" placeholder="password" />
           <label htmlFor="file">
             <div className="profileButton">
-              {fileName ? <AiFillIdcard style={iconStylesfull}/>:<AiFillIdcard style={iconStylesempty}/>}
+              { fileName ? <AiFillIdcard style={iconStylesfull}/>:<AiFillIdcard style={iconStylesempty}/>}
               
-              <span>Add an avatar</span>
+              <span>Add an avatar required</span>
             </div>
-
+            
             <span>{fileName}</span>
           </label>
-          <input required onChange={(e) => saveFile(e)}style={{ display: "none" }} type="file" id="file" />
+          <input required onChange={(e) => saveFile(e)} style={{ display: "none" }} type="file" id="file" />
           
           <button disabled={loading}>Register</button>
           <p style={{color: "#00b2be"}}>{loading && "Uploading and compressing the image please wait..."}</p>

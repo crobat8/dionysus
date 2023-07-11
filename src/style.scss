@@ -580,6 +580,14 @@ $usedgray3:#a0a0a0;
             font-size: 12px;
             margin-top: 10px;
         }
+        button{
+            background-color: $usedgray3;
+            color: white;
+            padding: 10px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
         
     }
 

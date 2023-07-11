@@ -19,6 +19,21 @@ const Login = () => {
       setErr(true);
     }
   };
+
+  const handleGuest = async (e) => {
+    e.preventDefault();
+    const email = "PartyUpContact@gmail.com";
+    const password = "PartyupGuest21%";
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      navigate("/")
+    } catch (err) {
+      setErr(true);
+    }
+  };
+  
+
   return (
     
       <div className="formWrapper">
@@ -28,9 +43,10 @@ const Login = () => {
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
           <button>Login</button>
+          
           {err && <span style={{color: "#00b2be"}}>Something went wrong</span>}
         </form>
-        
+        <button onClick={handleGuest}>Guest Login</button>
       </div>
     
   );

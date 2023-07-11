@@ -28,7 +28,7 @@ const Login = () => {
           <input type="email" placeholder="email" />
           <input type="password" placeholder="password" />
           <button>Login</button>
-          {err && <span>Something went wrong</span>}
+          {err && <span style={{color: "#00b2be"}}>Something went wrong</span>}
         </form>
         
       </div>

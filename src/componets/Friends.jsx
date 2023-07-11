@@ -178,10 +178,12 @@ const Friends = () =>{
     <div className="Friends">
       <div className='left'>
         <h1>
-          Requests
+          {requests.length ? "Requests":""}
         </h1>
+        {console.log(requests)}
         <div className="requests">
           {requests.map((e,i)=>{
+            
             return(
               <div className="request">
                 <img src={e.fromInfo.photoURL} alt="" />

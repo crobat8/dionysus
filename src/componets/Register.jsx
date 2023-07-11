@@ -96,8 +96,8 @@ const Register = () => {
           <input required onChange={(e) => saveFile(e)}style={{ display: "none" }} type="file" id="file" />
           
           <button disabled={loading}>Register</button>
-          {loading && "Uploading and compressing the image please wait..."}
-          {err && <span>Something went wrong</span>}
+          <p style={{color: "#00b2be"}}>{loading && "Uploading and compressing the image please wait..."}</p>
+          <p style={{color: "#00b2be"}}>{err && <span>Something went wrong</span>}</p>
         </form>
       </div>
     

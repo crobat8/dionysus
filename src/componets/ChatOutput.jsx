@@ -19,12 +19,15 @@ import {
   onSnapshot
 } from "firebase/firestore";
 
+import Filter from 'bad-words'
+
 const ChatOutput = (props) =>{
   var id = props.id;
   const [loading,setLoading] =useState(true);
   const [messages,setMessages]=useState();
   const{currentUser} = useContext(AuthContext);
-
+  
+  const filter = new Filter();
   function getMessages(){
       const messageRef =query(collection(db,"Chats")
                         ,where("id" , "==", id)
@@ -47,17 +50,18 @@ const ChatOutput = (props) =>{
   return(
     <div className='messageHolder'>
       {messages.map((e)=>{
+        var cleaned = filter.clean(e.text)
         if(e.sentBy === currentUser.uid){
           return(
             <p className='mychat' >
-              {e.text}
+              {cleaned}
             </p>
           )   
         }else{
           return(
             <div>
               <p className='theychat'>
-                {e.text}
+                {cleaned}
               </p>
               <p className='sentMarker'>
                 {e.sentName}

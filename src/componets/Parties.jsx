@@ -32,7 +32,13 @@ import {
   AuthContext 
 } from "../context/AuthContext";
 
+import { 
+  AiOutlineClose
+} from 'react-icons/ai';
+
 import PartyChat from "./PartyChat";
+
+
 
 var me = {lat: 48.8584, lng: 2.2945}
 
@@ -63,6 +69,7 @@ const Parties = () =>{
   const [convertedSlider,setConvertedSlider] = useState(10/69)
   const [genreFilter,setGenreFilter] =useState(["Sports","House Party","Yard Games","Hit The Town","Video Games","Board Games"]);
 
+  let closeStyle = { float:"right",color: "#e2f1ff", fontSize: "1.5em" ,padding:"5px"};
   function handleGenre(input){
     var value = input.target.value
     if(input.target.checked){
@@ -185,9 +192,13 @@ const Parties = () =>{
                 )
               })}
             </div>
+            
             <button onClick={(event)=> going(event,i)}>
               GOING
             </button>
+              
+            
+            
           </div>
           <div className="partyChat">
             <PartyChat event={event}/>
@@ -455,7 +466,9 @@ if(loading||!isLoaded||loading2||loading3){
                         <td>{e.Title}</td>
                         <td>{Object.keys(e.comingList).length}</td>
                         <td>{e.Wanted}</td>
+                          
                       </tr> 
+                      <AiOutlineClose style={closeStyle} onClick={()=>setChoseSlide(0)}/>
                       <DropDown information={e} number={i} coming={disNames}>
                       </DropDown> 
                     </div>

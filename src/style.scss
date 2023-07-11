@@ -186,6 +186,9 @@ $usedgray3:#a0a0a0;
                                 border-radius: 10px;
                                 
                             }
+                            .react-icons {
+                               color: #000000;
+                            }
                             .slideDown{
 
                                 .partyInfo{
@@ -193,13 +196,15 @@ $usedgray3:#a0a0a0;
                                     display: grid;
                                     grid-template-columns: 1fr 1fr 1fr;
                                     height: fit-content;
+
                                     p{
                                         margin: auto;
                                     }
                                     button{
                                         margin: auto;
+                                        
                                     }
-                                    background-color: $darkColor1;
+                                    
                                 }
                                 .partyChat{
                                     border:5px solid black;

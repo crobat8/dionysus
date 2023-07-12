@@ -27,8 +27,8 @@ import {
 const Friends = () =>{ 
 
   const{currentUser} = useContext(AuthContext);
-  const [username, setUsername] = useState("");
-  const [user, setUser] = useState(null);
+
+  const [users, setUsers] = useState([]);
   const [err, setErr] = useState(false);
   const [loading1,setLoading1] =useState(true);
   const [loading2,setLoading2] =useState(true);
@@ -37,51 +37,51 @@ const Friends = () =>{
   const [myData,setMyData]     = useState([])
   const [friends,setFriends]   = useState([]);
 
-  const handleSearch = async () => {
+  const handleSearch = async (e) => {
+
+    console.log(e)
     const q = query(
       collection(db, "users"),
-      where("displayName", "==", username)
+      where("displayName", "==", e)
     );
 
     try {
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        setUser(doc.data());
-      });
+      onSnapshot(q,(snapshot)=>{
+        setUsers(snapshot.docs.map(doc=>doc.data()))
+      })
     } catch (err) {
+      console.log(err)
       setErr(true);
     }
-  };
-
-  const handleKey = (e) => {
-      e.code === "Enter" && handleSearch();
+    console.log(users)
   };
 
   const sendRequest = async (e) =>{
     var requestName;
-    if(currentUser.uid>user){
-      requestName = user.uid+currentUser.uid
-    }else{
-      requestName = currentUser.uid+user.uid
-    }
-    const userHolder ={
-      displayName:currentUser.displayName,
-      email:currentUser.email,
-      photoURL:currentUser.photoURL,
-      uid:currentUser.uid,
-    }
-    try{
+    console.log(e);
+    // if(currentUser.uid>user){
+    //   requestName = user.uid+currentUser.uid
+    // }else{
+    //   requestName = currentUser.uid+user.uid
+    // }
+    // const userHolder ={
+    //   displayName:currentUser.displayName,
+    //   email:currentUser.email,
+    //   photoURL:currentUser.photoURL,
+    //   uid:currentUser.uid,
+    // }
+    // try{
         
-      await setDoc(doc(db, "Request", requestName), {
-        to:user.uid,
-        toInfo:user,
-        from:currentUser.uid,
-        fromInfo:userHolder,
-      });
-      alert("Request was succesfully sent");
-    }catch(err){
-      alert(err)
-    }
+    //   await setDoc(doc(db, "Request", requestName), {
+    //     to:user.uid,
+    //     toInfo:user,
+    //     from:currentUser.uid,
+    //     fromInfo:userHolder,
+    //   });
+    //   alert("Request was succesfully sent");
+    // }catch(err){
+    //   alert(err)
+    // }
   }
 
   function getRequests(){
@@ -180,7 +180,7 @@ const Friends = () =>{
         <h1>
           {requests.length ? "Requests":""}
         </h1>
-        {console.log(requests)}
+        
         <div className="requests">
           {requests.map((e,i)=>{
             
@@ -227,13 +227,28 @@ const Friends = () =>{
         <input
           type="text"
           placeholder="Find a user"
-          onKeyDown={handleKey}
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
+
+          onChange={(e) => handleSearch(e.target.value)}
+          
           className="addinput"
         />
-        {err && <span>User not found!</span>}
-        {user && (
+        {users.map((e,i)=>{
+
+          return(
+            <div className="add" >
+          <img src={e.photoURL} alt="" width={"100%"}/>
+          <div className="userChatInfo">
+            <span>{e.displayName}</span>
+            <button onClick={()=>sendRequest(e)} >
+              add user as friend
+            </button>
+          </div>
+         </div> 
+          )
+          
+        
+        })} 
+        {/* {user && (
           <div className="add" >
             <img src={user.photoURL} alt="" width={"100%"}/>
             <div className="userChatInfo">
@@ -243,7 +258,7 @@ const Friends = () =>{
               </button>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </div>
   )

@@ -29,10 +29,13 @@ const Register = () => {
     
     e.preventDefault();
     const displayName = e.target[0].value;
+    const lowerDisplayName = displayName.toLowerCase();
     const email = e.target[1].value;
     const password = e.target[2].value;
     const file = e.target[3].files[0];
-
+    const brokenDisplayName = []
+    for (var x = 1;x<=lowerDisplayName.length;x++)
+      brokenDisplayName.push(lowerDisplayName.substring(0, x))
     try {
       //Create user
       console.log("test")
@@ -54,6 +57,8 @@ const Register = () => {
             await setDoc(doc(db, "users", res.user.uid), {
               uid: res.user.uid,
               displayName,
+              lowerDisplayName,
+              brokenDisplayName,
               email,
               photoURL: downloadURL,
               friends:{
@@ -78,7 +83,7 @@ const Register = () => {
       setLoading(false);
     }
   };
-
+  
   return (
     
       <div className="formWrapper">

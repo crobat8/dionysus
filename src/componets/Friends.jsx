@@ -39,10 +39,12 @@ const Friends = () =>{
 
   const handleSearch = async (e) => {
 
-    console.log(e)
+
     const q = query(
       collection(db, "users"),
-      where("displayName", "==", e)
+      where("brokenDisplayName", "array-contains", e.toLowerCase()),
+      
+
     );
 
     try {
@@ -227,7 +229,7 @@ const Friends = () =>{
         <input
           type="text"
           placeholder="Find a user"
-
+          
           onChange={(e) => handleSearch(e.target.value)}
           
           className="addinput"
@@ -248,17 +250,6 @@ const Friends = () =>{
           
         
         })} 
-        {/* {user && (
-          <div className="add" >
-            <img src={user.photoURL} alt="" width={"100%"}/>
-            <div className="userChatInfo">
-              <span>{user.displayName}</span>
-              <button onClick={sendRequest} >
-                add user as friend
-              </button>
-            </div>
-          </div>
-        )} */}
       </div>
     </div>
   )

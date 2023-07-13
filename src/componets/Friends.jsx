@@ -38,15 +38,11 @@ const Friends = () =>{
   const [friends,setFriends]   = useState([]);
 
   const handleSearch = async (e) => {
-
-
     const q = query(
       collection(db, "users"),
       where("brokenDisplayName", "array-contains", e.toLowerCase()),
-      
 
     );
-
     try {
       onSnapshot(q,(snapshot)=>{
         setUsers(snapshot.docs.map(doc=>doc.data()))
@@ -55,35 +51,36 @@ const Friends = () =>{
       console.log(err)
       setErr(true);
     }
-    console.log(users)
+
   };
 
   const sendRequest = async (e) =>{
     var requestName;
     console.log(e);
-    // if(currentUser.uid>user){
-    //   requestName = user.uid+currentUser.uid
-    // }else{
-    //   requestName = currentUser.uid+user.uid
-    // }
-    // const userHolder ={
-    //   displayName:currentUser.displayName,
-    //   email:currentUser.email,
-    //   photoURL:currentUser.photoURL,
-    //   uid:currentUser.uid,
-    // }
-    // try{
+    if(currentUser.uid>e.uid){
+      requestName = e.uid+currentUser.uid
+    }else{
+      requestName = currentUser.uid+e.uid
+    }
+    const userHolder ={
+      displayName:currentUser.displayName,
+      email:currentUser.email,
+      photoURL:currentUser.photoURL,
+      uid:currentUser.uid,
+    }
+    
+    try{
         
-    //   await setDoc(doc(db, "Request", requestName), {
-    //     to:user.uid,
-    //     toInfo:user,
-    //     from:currentUser.uid,
-    //     fromInfo:userHolder,
-    //   });
-    //   alert("Request was succesfully sent");
-    // }catch(err){
-    //   alert(err)
-    // }
+      await setDoc(doc(db, "Request", requestName), {
+        to:e.uid,
+        toInfo:e,
+        from:currentUser.uid,
+        fromInfo:userHolder,
+      });
+      alert("Request was succesfully sent");
+    }catch(err){
+      alert(err)
+    }
   }
 
   function getRequests(){
@@ -136,9 +133,11 @@ const Friends = () =>{
     }else{
       alert("the delete was canceled")
     }
+    getFriends();
   }
 
   const removeRequst = (incomming) =>{  
+    
     var requestsearch;
     if(incomming>currentUser.uid){
       requestsearch = currentUser.uid+incomming

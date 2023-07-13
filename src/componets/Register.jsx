@@ -58,6 +58,7 @@ const Register = () => {
               displayName,
               lowerDisplayName,
               brokenDisplayName,
+              cleanText:0,
               email,
               photoURL: downloadURL,
               friends:{

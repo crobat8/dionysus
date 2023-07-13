@@ -1,6 +1,7 @@
 import React,{
    useState,
-   useContext 
+   useContext,
+   memo,
 } from "react";
 
 import {  
@@ -498,4 +499,4 @@ if(loading||!isLoaded||loading2||loading3){
     </div>
   )
 }
-export default Parties;
+export default memo(Parties);

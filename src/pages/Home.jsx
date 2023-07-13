@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,memo } from 'react';
 
 
 import Parties from '../componets/Parties';
 import Create from '../componets/Create';
 import Friends from '../componets/Friends';
-
+import Settings from '../componets/Settings';
 
 import logo from '../img/partyuplogo.png'
 import { auth } from '../firebase'
@@ -21,8 +21,11 @@ const Home = () =>{
     
     const [page,setPage] = useState(0);
     const{currentUser} = useContext(AuthContext);
+
     let iconStyles = { color: "#e2f1ff", fontSize: "1.5em" ,padding:"5px"};
     
+    
+
     function review(){
         alert("we are still working on implementing this")
     }
@@ -35,6 +38,8 @@ const Home = () =>{
             return <Create/>
         }else if(page === 3){
             return <Friends/>
+        }else if(page === 4){
+            return <Settings/>
         }else {
             return (
             <div style={{"min-height": "1000px","textAlign":"center"}}>
@@ -55,13 +60,13 @@ const Home = () =>{
     }
 
     return (
-        <div className="home">
-            <header className="topBar">
+        <div className="home" >
+            <header className="topBar" >
                 
-                <img src={logo} alt='logo'/>
+                <img src={logo} alt='logo' onClick={()=>setPage(1)} />
                 
 
-                <ul className="selectors">
+                <ul className="selectors"  >
                     <button onClick={()=>setPage(1)}>
                         Parties
                     </button>
@@ -88,20 +93,25 @@ const Home = () =>{
                     }
                     
                 </ul>
-                <div className='logout'>
+                <div className='user' onClick={()=>setPage(4)}>
+                    <img src={currentUser.photoURL} alt="" width={"100%"}/>
+                    
+                    <button onClick={()=>signOut(auth)}className='logout'>logout</button>
                     <h4>
                         name:{currentUser.displayName}
                     </h4>
-                    <button onClick={()=>signOut(auth)}>logout</button>
+                    
+                        
+                    
                     
                 </div>
                 
                 
             </header>
-            <main className="page">
+            <main className="page" >
                 <HandleSwap/>
             </main>
-            <footer className="information">
+            <footer className="information" >
                 <div className='infoTop'>
                     <div className='left'>
                         <h3>
@@ -135,7 +145,7 @@ const Home = () =>{
                         </button>
                     </div>
                 </div>
-                <div className='infoBot'>
+                <div className='infoBot' >
                     <span className='copy'>
                         &copy; PartyUp
                     </span>                 

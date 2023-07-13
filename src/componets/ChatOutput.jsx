@@ -54,8 +54,11 @@ const ChatOutput = (props) =>{
       {messages.map((e)=>{
 
         var text;
+        //different levels of filter for chat
         if(cleanTxt == 0){
           text = filter.clean(e.text)
+        }else if(cleanTxt == 1){
+          text = e.text
         }else{
           text = e.text
         }

@@ -17,19 +17,22 @@ $usedgray3:#a0a0a0;
             position: sticky;
             top: 0;
             z-index: 100;
-            img{
-            margin: auto;
-            max-height: 75px;
-            }
+            max-height: 100px;
             background-color: black ;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr ;
-            height: 100px;
+            
+            img{
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 5px;
+                max-height: 75px;
+            }
             .selectors{
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr;
                 button{
-                    margin: auto;
+                    margin-top: 25px;
                     margin-left: 5px;
                     margin-right: 5px;
                     height: 50px;
@@ -44,28 +47,46 @@ $usedgray3:#a0a0a0;
                     
                 }
             }
-            .logout{
+            .user{
                 margin: auto;
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr 1fr ;
                 h4{
                     margin: auto;
                     color: $lightColor1;
                 }
                 button{
+                    margin-top: 25px ;
                     height: 50px;
                     width: 100px;
                     border-radius: 20%;
                     background-color:$lightColor1 ;
                     color: black;
                     border-color: $lightColor1;
+                    padding: 10px;
                 }
                 button:hover{
                     background-color: $lightColor2 ;
                     
                 }
-
+                img{
+                    border-radius: 50%;
+                    width: 75px;
+                    height: 75px;
+                }
                 
+                ul{
+                    
+                    background-color: #04222b;
+                    list-style-type: none;
+                    li{
+                        padding: 10px;
+                        .logout{
+                            border-color: #000000;
+                            background-color: $usedgray3;
+                        }
+                    }
+                }
             }
         }
         .page{

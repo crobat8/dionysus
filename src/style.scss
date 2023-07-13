@@ -455,7 +455,9 @@ $usedgray3:#a0a0a0;
                     height: 200px;
                     border-radius: 10px;
                     form{
-                        
+                        input{
+                            color: $usedgray1;
+                        }
                         button{
                             margin-top: 25px ;
                             height: 50px;

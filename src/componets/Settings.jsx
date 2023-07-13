@@ -17,7 +17,9 @@ import {
   query,
   where, 
 } from "firebase/firestore";
+
 import CleanTextSetting from "./CleanTextSetting";
+import DisplayNameSetting from "./DisplayNameSetting";
 
 const Settings = () =>{
   const{currentUser} = useContext(AuthContext);
@@ -45,9 +47,10 @@ const Settings = () =>{
     console.log(myData)
   }
   return (
-    
     <div className="Settings">
+      <h1>Update User Settings</h1>
       <CleanTextSetting label={"Clean Text"} currentVal={myData[0].cleanText}/>
+      <DisplayNameSetting label={"Display Name"} currentVal={myData[0].displayName}/>
       {/* <Setting label={"Display Name"} currentVal={myData[0].displayName}/>
       <Setting label={"Profile Picture"} currentVal={myData[0].photoURL}/> */}
     </div>

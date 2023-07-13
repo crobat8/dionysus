@@ -16,7 +16,6 @@ import React,{
   
   const CleanTextSetting = (props) =>{
     const{currentUser} = useContext(AuthContext);
-    const[loading,setLoading] = useState(true)
     
     const handleSubmit = async (e) => {
       e.preventDefault();
@@ -77,7 +76,7 @@ import React,{
             <option value="2">censor text off</option>
           </select>
         </label>
-      <button>Save</button>
+      <button>Update</button>
     </form>
     </div>
     )

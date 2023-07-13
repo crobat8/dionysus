@@ -100,10 +100,6 @@ const Home = () =>{
                     <h4>
                         name:{currentUser.displayName}
                     </h4>
-                    
-                        
-                    
-                    
                 </div>
                 
                 

@@ -16,7 +16,7 @@ const PartyChat = (props) =>{
 
   return(
     <div className="fullChat">
-      <ChatOutput id={e.id}/>
+      <ChatOutput id={e.id} cleanText = {props.cleanText}/>
       {currentUser.uid == "BqJmqRQc2gQnSoHZVwoH8Q99uya2"
         ?
         <h4>

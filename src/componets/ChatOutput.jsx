@@ -28,7 +28,6 @@ const ChatOutput = (props) =>{
   const{currentUser} = useContext(AuthContext);
   
   //lets users choose if they want to see profanity
-  const cleanTxt = 0
   const filter = new Filter();
   function getMessages(){
       const messageRef =query(collection(db,"Chats")
@@ -52,12 +51,12 @@ const ChatOutput = (props) =>{
   return(
     <div className='messageHolder'>
       {messages.map((e)=>{
-
+        console.log(props.cleanText)
         var text;
         //different levels of filter for chat
-        if(cleanTxt == 0){
+        if(props.cleanText == 0){
           text = filter.clean(e.text)
-        }else if(cleanTxt == 1){
+        }else if(props.cleanText == 1){
           text = e.text
         }else{
           text = e.text

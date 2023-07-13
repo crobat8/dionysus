@@ -75,18 +75,7 @@ $usedgray3:#a0a0a0;
                     height: 75px;
                 }
                 
-                ul{
-                    
-                    background-color: #04222b;
-                    list-style-type: none;
-                    li{
-                        padding: 10px;
-                        .logout{
-                            border-color: #000000;
-                            background-color: $usedgray3;
-                        }
-                    }
-                }
+                
             }
         }
         .page{
@@ -454,6 +443,32 @@ $usedgray3:#a0a0a0;
 
                 }
             } 
+
+            .Settings{
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr ;
+                min-height: 800px;
+                .Setting{
+                    background-color: $lightColor2;
+                    padding: 20px;
+                    margin: 20px;
+                    height: 200px;
+                    border-radius: 10px;
+                    form{
+                        
+                        button{
+                            margin-top: 25px ;
+                            height: 50px;
+                            width: 100px;
+                            border-radius: 20%;
+                            background-color:$darkColor1 ;
+                            color: black;
+                            border-color: $darkColor2;
+                            padding: 10px;
+                        }
+                    }
+                }
+            }
         }
         
         .information{
@@ -512,6 +527,8 @@ $usedgray3:#a0a0a0;
                 
             }
         }
+
+        
     }
 }
 

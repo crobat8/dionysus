@@ -8,16 +8,13 @@ import {
   db
 } from "../firebase";
 
-import {
-  query,
-  where, 
-} from "firebase/firestore";
-
 import { 
   collection,
   doc,
   updateDoc,
-  onSnapshot
+  onSnapshot,
+  query,
+  where, 
 } from "firebase/firestore";
 
 import my from "../img/person.png"
@@ -202,7 +199,7 @@ const Parties = () =>{
             
           </div>
           <div className="partyChat">
-            <PartyChat event={event}/>
+            <PartyChat event={event} cleanText = {myData[0].cleanText}/>
           </div>
         </div>
       )

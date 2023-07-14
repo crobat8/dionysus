@@ -17,13 +17,17 @@ import {
   where, 
 } from "firebase/firestore";
 
-import my from "../img/person.png"
+import myLocation from "../img/person.png"
+
+
+
 
 import { 
   GoogleMap, 
   useJsApiLoader, 
   MarkerF,
-  InfoWindowF
+  InfoWindowF,
+  OverlayViewF,
 } from "@react-google-maps/api";
 
 import { 
@@ -35,7 +39,7 @@ import {
 } from 'react-icons/ai';
 
 import PartyChat from "./PartyChat";
-
+/*global google*/
 
 
 var me = {lat: 48.8584, lng: 2.2945}
@@ -372,6 +376,7 @@ if(loading||!isLoaded||loading2||loading3){
             onLoad={map => setMap(map)}
           >
             {parties.map((e,i)=>{
+              
               i=i+1;
               var Loc = {lat: e.Lattitude, lng: e.Longitude}
               var close = 0
@@ -383,48 +388,60 @@ if(loading||!isLoaded||loading2||loading3){
               }
               
               if(filterBool&&rangeBool){
-                if(i == choseSlide){
-                  return(
-                    <MarkerF 
-                    icon={
-                      StyleSheet
-                    }
-                    position={Loc} 
-                    key={i}
-                    zIndex={75}
-                    onClick={() => handleDropDown({i})}
-                    label={i.toString()}
-                    >
-                      <InfoWindowF
-                        position={Loc} 
-                        key={i}
-                        onCloseClick={(close) => handleDropDown({close})}
-                      >
-                        <span>
-                          {e.Address}
-                        </span>
-                      </InfoWindowF>
-                    </MarkerF>     
-                  )
-                }else{
-                  return(
-                    <MarkerF 
-                    icon={
-                      StyleSheet
-                    }
-                    position={Loc} 
-                    key={i}
-                    zIndex={i}
-                    onClick={() => handleDropDown({i})}
-                    label={i.toString()}
-                    >
-                    </MarkerF>            
-                  )
+                console.log(e)
+                const image = {
+                  url:e.EventPhoto,
+                  scaledSize :new google.maps.Size(30,50),
                 }
+                const label = {
+                  text:e.Host,
+                }
+                const picture = document.createElement("div");
+                picture.className = "marker";
+                picture.textContent = "$2.5M";
+                return(
+                  
+                  <MarkerF 
+                  flat={true}
+                  position={Loc} 
+                  key={i}
+                  zIndex={75}
+                  onClick={() => handleDropDown({i})}
+                  label={label}
+                  content={picture}
+                  >
+                    
+                    {i== choseSlide
+                    ?
+                    <InfoWindowF
+                      position={Loc} 
+                      key={i}
+                      onCloseClick={(close) => handleDropDown({close})}
+                      content=''
+                    >
+                      <div className="EventPop">
+                        <div className="EventInfo">
+                          <span className="eventHost">
+                            Hosted By: {e.Host}
+                          </span>
+                          <span className="eventLoc">
+                            {e.Address}
+                        </span>
+                        </div>
+                        <img className="EventPic" src={e.EventPhoto} alt="" width={"100%"}/>
+                        
+                      </div>
+                      
+                    </InfoWindowF>
+                    :
+                    null
+                    }
+                  </MarkerF>     
+                )
               }
             })}
             <MarkerF 
-              icon={my}
+              icon={myLocation}
               position={me} 
               zIndex={50}
             />
@@ -433,7 +450,7 @@ if(loading||!isLoaded||loading2||loading3){
         <table class="table" >
           <thead>
             <tr className="header">
-              <th>Number</th>
+              <th>Host</th>
               <th>Event Type</th>
               <th>Title</th>
               <th>people coming</th>
@@ -459,7 +476,7 @@ if(loading||!isLoaded||loading2||loading3){
                   return(
                     <div  className="FullParty" style={{backgroundColor:"#00618c"}}>
                       <tr key={i} className="line" onClick={() => handleDropDown({i})}>
-                        <td>{i}</td>
+                        <td>{e.Host}</td>
                         <td>{e.EventType}</td>
                         <td>{e.Title}</td>
                         <td>{Object.keys(e.comingList).length}</td>
@@ -475,7 +492,7 @@ if(loading||!isLoaded||loading2||loading3){
                   return(
                     <div  className="FullParty" >
                       <tr key={i} className="line" onClick={() => handleDropDown({i})}>
-                        <td>{i}</td>
+                        <td>{e.Host}</td>
                         <td>{e.EventType}</td>
                         <td>{e.Title}</td>
                         <td>{Object.keys(e.comingList).length}</td>

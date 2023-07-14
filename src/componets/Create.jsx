@@ -97,13 +97,15 @@ const Create = () =>{
     const Wanted = e.target[4].value;
     const Location = partyLocation;
     const Address = destiantionRef.current.value
-
+    const id = currentUser.uid;
+    const EventPhoto = currentUser.photoURL
+    const Host = currentUser.displayName
     try{
       setDoc(doc(db, "Event", currentUser.uid), {
         comingList:{
           [currentUser.uid]:currentUser.uid
         },
-        id:currentUser.uid,
+        id,
         EventType,
         Title,
         Description,
@@ -112,6 +114,9 @@ const Create = () =>{
         Longitude:center.lng,
         Location,
         Address,
+        EventPhoto,
+        Host
+        
       });
       e.preventDefault();
 

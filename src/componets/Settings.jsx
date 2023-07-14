@@ -20,6 +20,7 @@ import {
 
 import CleanTextSetting from "./CleanTextSetting";
 import DisplayNameSetting from "./DisplayNameSetting";
+import ProfilePictureSetting from "./ProfilePictureSetting";
 
 const Settings = () =>{
   const{currentUser} = useContext(AuthContext);
@@ -51,8 +52,7 @@ const Settings = () =>{
       <h1>Update User Settings</h1>
       <CleanTextSetting label={"Clean Text"} currentVal={myData[0].cleanText}/>
       <DisplayNameSetting label={"Display Name"} currentVal={myData[0].displayName}/>
-      {/* <Setting label={"Display Name"} currentVal={myData[0].displayName}/>
-      <Setting label={"Profile Picture"} currentVal={myData[0].photoURL}/> */}
+      <ProfilePictureSetting label={"Profile Picture"} currentVal={myData[0].photoURL}/>
     </div>
   )
 }

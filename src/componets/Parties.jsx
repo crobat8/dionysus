@@ -19,9 +19,6 @@ import {
 
 import myLocation from "../img/person.png"
 
-
-
-
 import { 
   GoogleMap, 
   useJsApiLoader, 
@@ -213,6 +210,7 @@ const Parties = () =>{
   
  
 if(loading||!isLoaded||loading2||loading3){
+
     getParties();
     getMe();
     return <h1>
@@ -388,7 +386,7 @@ if(loading||!isLoaded||loading2||loading3){
               }
               
               if(filterBool&&rangeBool){
-                console.log(e)
+                
                 const image = {
                   url:e.EventPhoto,
                   scaledSize :new google.maps.Size(30,50),
@@ -459,6 +457,7 @@ if(loading||!isLoaded||loading2||loading3){
           </thead>
           <tbody className="rows">
             {parties.map((e,i)=>{
+              console.log(e)
               //used to find crossover between friends and who is coming to the party
               var friendIds =Object.values(myData[0].friends)
               var comingIds =Object.values(e.comingList)

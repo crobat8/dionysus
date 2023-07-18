@@ -16,7 +16,7 @@ const Review = () =>{
     console.log(date)
     
     try{
-      setDoc(doc(db, "Event", date+currentUser.uid), {
+      setDoc(doc(db, "Reviews", date+currentUser.uid), {
         
         date,
         email,

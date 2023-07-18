@@ -425,8 +425,9 @@ if(loading||!isLoaded||loading2||loading3){
                           <span className="eventLoc">
                             {e.Address}
                         </span>
-                        </div>
                         <img className="EventPic" src={e.EventPhoto} alt="" width={"100%"}/>
+                        </div>
+                        
                         
                       </div>
                       

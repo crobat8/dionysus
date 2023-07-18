@@ -125,9 +125,6 @@ const Create = () =>{
         var num = e.date
         var str = num.toString()
         var sentAdded = str+e.sentBy
-        console.log(e)
-        console.log(num);
-        console.log(str);
         deleteDoc(doc(db,"Chats",sentAdded))
       });
 

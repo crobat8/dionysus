@@ -16,6 +16,7 @@ import {
     AiFillFacebook,
     AiFillInstagram 
 } from 'react-icons/ai';
+import Review from '../componets/Review';
 
 const Home = () =>{ 
     
@@ -40,6 +41,8 @@ const Home = () =>{
             return <Friends/>
         }else if(page === 4){
             return <Settings/>
+        }else if(page === 5){
+            return <Review/>
         }else {
             return (
             <div style={{"min-height": "1000px","textAlign":"center"}}>
@@ -136,7 +139,7 @@ const Home = () =>{
                         <h3>
                             Other
                         </h3>
-                        <button  onClick={()=>review()}>
+                        <button  onClick={()=>setPage(5)}>
                             send us a review
                         </button>
                     </div>

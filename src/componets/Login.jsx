@@ -44,7 +44,7 @@ const Login = () => {
           <input type="password" placeholder="password" />
           <button>Login</button>
           
-          {err && <span style={{color: "#00b2be"}}>Something went wrong</span>}
+          
         </form>
         <button onClick={handleGuest}>Guest Login</button>
       </div>

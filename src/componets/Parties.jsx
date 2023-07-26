@@ -1,5 +1,6 @@
 import React,{
    useState,
+   useEffect,
    useContext,
    memo,
 } from "react";
@@ -54,12 +55,13 @@ const Parties = () =>{
     googleMapsApiKey: 'AIzaSyBvBeQOPrT0k1EFYDd7niC-aBbTEUj7uK0',
     libraries: ['places'],
   })
+  
   const{currentUser} = useContext(AuthContext);
+  currentUser.uid='BqJmqRQc2gQnSoHZVwoH8Q99uya2'
   const [map, setMap] = useState(/** @type google.maps.Map */ (null))
   const [loading,setLoading] =useState(true);
   const [loading2,setLoading2] =useState(true);
   const [loading3,setLoading3] =useState(true);
-  const [loading4,setLoading4] =useState(false);
   const [parties,setParties] = useState([]);
   const [choseSlide,setChoseSlide] =useState(0);
   const [myData,setMyData]     = useState([]);
@@ -133,6 +135,7 @@ const Parties = () =>{
   }
 
   function getMe(){
+    console.log("test1")
     const meRef = query(collection(db,"users")
                   ,where("uid","==",currentUser.uid))
     onSnapshot(meRef,(snapshot)=>{
@@ -143,6 +146,7 @@ const Parties = () =>{
     if(loading2){
 
     }else{
+      console.log('test2')
     const friendIds = Object.values(myData[0].friends)
     const friendsRef = query(collection(db,"users")
                       ,where("uid","in",friendIds))
@@ -213,6 +217,8 @@ if(loading||!isLoaded||loading2||loading3){
 
     getParties();
     getMe();
+
+
     return <h1>
       Loading
     </h1>

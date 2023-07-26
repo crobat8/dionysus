@@ -20,7 +20,7 @@ import Review from '../componets/Review';
 
 const Home = () =>{ 
     
-    const [page,setPage] = useState(0);
+    const [page,setPage] = useState(1);
     const{currentUser} = useContext(AuthContext);
 
     let iconStyles = { color: "#e2f1ff", fontSize: "1.5em" ,padding:"5px"};

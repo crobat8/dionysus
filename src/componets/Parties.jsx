@@ -57,7 +57,11 @@ const Parties = () =>{
   })
   
   const{currentUser} = useContext(AuthContext);
-  currentUser.uid='BqJmqRQc2gQnSoHZVwoH8Q99uya2'
+
+  while(currentUser ===null){
+    console.log(currentUser,"1")
+  }
+
   const [map, setMap] = useState(/** @type google.maps.Map */ (null))
   const [loading,setLoading] =useState(true);
   const [loading2,setLoading2] =useState(true);
@@ -135,7 +139,6 @@ const Parties = () =>{
   }
 
   function getMe(){
-    console.log("test1")
     const meRef = query(collection(db,"users")
                   ,where("uid","==",currentUser.uid))
     onSnapshot(meRef,(snapshot)=>{
@@ -146,7 +149,6 @@ const Parties = () =>{
     if(loading2){
 
     }else{
-      console.log('test2')
     const friendIds = Object.values(myData[0].friends)
     const friendsRef = query(collection(db,"users")
                       ,where("uid","in",friendIds))
@@ -464,7 +466,7 @@ if(loading||!isLoaded||loading2||loading3){
           </thead>
           <tbody className="rows">
             {parties.map((e,i)=>{
-              console.log(e)
+
               //used to find crossover between friends and who is coming to the party
               var friendIds =Object.values(myData[0].friends)
               var comingIds =Object.values(e.comingList)

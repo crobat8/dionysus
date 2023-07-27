@@ -5,16 +5,20 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { doc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { 
-  AiFillIdcard
+  AiFillGithub,
+  AiFillLinkedin,
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillMail,
+  AiOutlineKey,
+  AiOutlineUser
 } from 'react-icons/ai';
-const Register = () => {
+const Register = ({change}) => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [fileName,setFileName] = useState('')
-
-  let iconStylesempty = { color: "#000000", fontSize: "3em" ,padding:"5px"};
-  let iconStylesfull = { color: "#e2f1ff", fontSize: "3em" ,padding:"5px"};
+  let iconStyles = { color: "#1B2430", height:"16px",width:"16px",padding:"5px"};
   
   const saveFile = (e) =>{
     
@@ -86,13 +90,39 @@ const Register = () => {
   return (
     
       <div className="formWrapper">
-        <span className="logo">PartyUp</span>
-        <span className="title">Register</span>
+        <h3 className="loginTitle">
+          Register an account
+        </h3>
         <form onSubmit={handleSubmit}>
-          <input required type="text" placeholder="display name" />
-          <input required type="email" placeholder="email" />
-          <input required type="password" placeholder="password" />
-          <label htmlFor="file">
+          <div className="fullIn">
+            <div className="left">
+              <AiOutlineUser style={iconStyles}/>
+            </div>
+            <div className="right">
+              <label for='displayName'>Display Name</label>
+              <input type="displayName" placeholder="displayName" />
+            </div>
+          </div>
+          <div className="fullIn">
+            <div className="left">
+              <AiFillMail style={iconStyles}/>
+            </div>
+            <div className="right">
+              <label for='email'>Email</label>
+              <input type="email" placeholder="email" />
+            </div>
+          </div>
+          <div className="fullIn">
+            <div className="left">
+              <AiOutlineKey style={iconStyles}/>
+            </div>
+            <div className="right">
+              <label for='password'>Password</label>
+              <input type="password" placeholder="password" />
+            </div>
+          </div>
+
+          {/* <label htmlFor="file">
             <div className="profileButton">
               { fileName ? <AiFillIdcard style={iconStylesfull}/>:<AiFillIdcard style={iconStylesempty}/>}
               
@@ -102,11 +132,17 @@ const Register = () => {
             <span>{fileName}</span>
           </label>
           <input required onChange={(e) => saveFile(e)} style={{ display: "none" }} type="file" id="file" />
-          
-          <button disabled={loading}>Register</button>
-          <p style={{color: "#00b2be"}}>{loading && "Uploading and compressing the image please wait..."}</p>
+           */}
+          <button className="logButton" disabled={loading}>Register</button>
+          <p style={{color: "#00b2be"}}>{loading && "creating profile"}</p>
           <p style={{color: "#00b2be"}}>{err && <span>Something went wrong</span>}</p>
         </form>
+        <span onClick={() => change(1)} style={{cursor:'pointer'}}>
+          already have an acount {" "}
+          <strong >
+            Log In
+          </strong>
+        </span>
       </div>
     
   );

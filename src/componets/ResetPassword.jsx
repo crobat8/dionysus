@@ -2,11 +2,19 @@ import React, { useState } from 'react';
 
 import { auth, db, storage,getAuth} from "../firebase";
 import { sendPasswordResetEmail } from "firebase/auth";
-const ResetPassword = () =>{
+import { 
+  AiFillGithub,
+  AiFillLinkedin,
+  AiFillFacebook,
+  AiFillInstagram,
+  AiFillMail,
+  AiOutlineKey
+} from 'react-icons/ai';
+const ResetPassword = ({change}) =>{
 
     const [email, setEmail] = useState('')
     const [loading,setLoading] = useState(false)
-
+    let iconStyles = { color: "#1B2430", height:"16px",width:"16px",padding:"5px"};
     const triggerResetEmail = async (e) =>{
       setLoading(true);
       e.preventDefault();
@@ -17,16 +25,26 @@ const ResetPassword = () =>{
 
     return (
       <div className="formWrapper">
-        <span className="logo">PartyUp</span>
-        <span className="title">Reset Password</span>
-        <span className="title">enter your email</span>
+        <h3 className="loginTitle">
+          Reset your account password
+        </h3>
         <form onSubmit={triggerResetEmail}>
-          <input required value={email} type="email" placeholder="email" onChange={e => setEmail(e.target.value)}/>
+          <div className="fullIn">
+            <div className="left">
+              <AiFillMail style={iconStyles}/>
+            </div>
+            <div className="right">
+              <label for='email'>Email</label>
+              <input type="email" placeholder="email" />
+            </div>
+          </div>
 
           
-          <button>send reset email</button>
-          
-          <p style={{color: "#00b2be"}}>{loading && <span>Reset email has been sent</span>}</p>
+          <button className="logButton">Log In</button>
+          <span onClick={() => change(1)} style={{cursor:'pointer'}}>
+            back to log in
+          </span>
+          {/* <p style={{color: "#00b2be"}}>{loading && <span>Reset email has been sent</span>}</p> */}
         </form>
       </div>
         

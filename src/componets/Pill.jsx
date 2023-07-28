@@ -1,7 +1,6 @@
 import React from "react";
 
 const Pill = (props) =>{
-  console.log(props)
   if(props.count%2==0){
     
     return(

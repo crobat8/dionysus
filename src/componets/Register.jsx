@@ -67,9 +67,9 @@ const Register = ({change}) => {
             Jerry:"Jerry"
             
           }
-        });
-        //create empty user chats on firestore
-        navigate("/");
+        }).then(() => {
+          console.log("Successful")}
+        );
       } catch (err) {
         console.log(err);
         setErr(true);

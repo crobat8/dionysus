@@ -53,7 +53,6 @@ const Landing = () =>{
         </div>
         <div className='pills'>
             {pillInfo.map((e,i)=>{
-              console.log(i)
               return(
                 <Pill data={e} count={i}/>
               )

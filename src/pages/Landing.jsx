@@ -6,11 +6,29 @@ import ReactCardFlip from "react-card-flip";
 import ResetPassword from '../componets/ResetPassword';
 import background from '../img/home_banner_edit.png'
 import logo from '../img/partyuplogo.png'
+import Pill from '../componets/Pill';
+
 const Landing = () =>{ 
   const [slide,setSlide] = useState(1)
-
+  const pillInfo = [
+    {
+      title:"party",
+      description:"Find local events, get-togethers, or parties near you.",
+      pic:logo
+    },
+    {
+      title:"Create",
+      description:"Make your own events and meet new people",
+      pic:logo
+    },
+    {
+      title:"Friends",
+      description:"Met somebody at and evenet you want to keep in touch with? Add them as a friend.",
+      pic:logo
+    }
+  ]
   function HandleSwap(){
-        
+    
     if(slide === 1){
       return <Login change={changeSlide}/>;
     }else if(slide === 2){
@@ -33,47 +51,18 @@ const Landing = () =>{
           <img className='home_banner' src={background} alt='logo'/>
           <HandleSwap/>
         </div>
-        
-        
+        <div className='pills'>
+            {pillInfo.map((e,i)=>{
+              console.log(i)
+              return(
+                <Pill data={e} count={i}/>
+              )
+              
+            })}
+        </div>
       </main>
       <footer className='botBar'>
-
       </footer>
-      
-      {/* <ReactCardFlip isFlipped={flipR}>
-        {flipR?<div>
-        </div>:<ReactCardFlip isFlipped={flip}
-          flipDirection="horizontal">
-          <Login/>
-          <Register/>
-        </ReactCardFlip>}
-        
-        <ResetPassword/>
-      </ReactCardFlip>
-      
-      {flipR?<div></div>:<button style={{
-              margin: '10px',
-              width: '150px',
-              padding: '10px',
-              fontSize: '20px',
-              background: '#00618c',
-              fontWeight: 'bold',
-              borderRadius: '5px'
-              }} onClick={() => setFlip(!flip)}>
-        {flip ? "Login": "Register"}
-      </button>}
-      
-      <button style={{
-              margin: '10px',
-              width: '150px',
-              padding: '10px',
-              fontSize: '20px',
-              background: '#00618c',
-              fontWeight: 'bold',
-              borderRadius: '5px'
-              }} onClick={() => setFlipR(!flipR)}>
-        {flipR ? "Go Back": "Password Reset"}
-      </button> */}
     </div>
   )
 }

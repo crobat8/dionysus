@@ -744,6 +744,31 @@ $usedgray3:#a0a0a0;
                 }
             }
         }
+        .pills{
+
+            .pill{
+                border-radius: 30px;
+                margin: 5%;
+                border: solid #FFC862 2px;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                overflow: hidden;
+                .text{
+                    padding: 10%;
+                    background-color: #FFC862;
+                    p{
+                        color: white;
+                    }
+                }
+                .picture{
+                    img{
+                        padding: 10%;
+                        max-height: 80%;
+                        max-width: 80%;
+                    }
+                }
+            }
+        }
 
     }
     .botBar{

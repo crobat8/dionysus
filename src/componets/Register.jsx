@@ -27,7 +27,9 @@ const Register = ({change}) => {
   }
 
   const handleSubmit = async (e) => {
-    console.log(e)
+    console.log(e.target[0].value)
+    console.log(e.target[1].value)
+    console.log(e.target[2].value)
     setLoading(true);
     
     e.preventDefault();
@@ -35,7 +37,6 @@ const Register = ({change}) => {
     const lowerDisplayName = displayName.toLowerCase();
     const email = e.target[1].value;
     const password = e.target[2].value;
-    const file = e.target[3].files[0];
     const brokenDisplayName = []
     for (var x = 1;x<=lowerDisplayName.length;x++)
       brokenDisplayName.push(lowerDisplayName.substring(0, x))
@@ -46,41 +47,35 @@ const Register = ({change}) => {
 
       //Create a unique image name
       const date = new Date().getTime();
-      const storageRef = ref(storage, `${displayName + date}`);
 
-      await uploadBytesResumable(storageRef, file).then(() => {
-        getDownloadURL(storageRef).then(async (downloadURL) => {
-          try {
-            //Update profile
-            await updateProfile(res.user, {
-              displayName,
-              photoURL: downloadURL,
-            });
-            //create user on firestore
-            await setDoc(doc(db, "users", res.user.uid), {
-              uid: res.user.uid,
-              displayName,
-              lowerDisplayName,
-              brokenDisplayName,
-              cleanText:0,
-              email,
-              photoURL: downloadURL,
-              friends:{
-                Jerry:"Jerry"
-                
-              }
-            });
-
-            //create empty user chats on firestore
-            await setDoc(doc(db, "userChats", res.user.uid), {});
-            navigate("/");
-          } catch (err) {
-            console.log(err);
-            setErr(true);
-            setLoading(false);
+      try {
+        //Update profile
+        await updateProfile(res.user, {
+          displayName,
+          photoURL: "https://firebasestorage.googleapis.com/v0/b/partyup-76d1a.appspot.com/o/GUEST1689117670991?alt=media&token=7c0d02f7-4b98-4f24-a070-5c82b5b368ab",
+        });
+        //create user on firestore
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          displayName,
+          lowerDisplayName,
+          brokenDisplayName,
+          cleanText:0,
+          email,
+          photoURL: "https://firebasestorage.googleapis.com/v0/b/partyup-76d1a.appspot.com/o/GUEST1689117670991?alt=media&token=7c0d02f7-4b98-4f24-a070-5c82b5b368ab",
+          friends:{
+            Jerry:"Jerry"
+            
           }
         });
-      });
+        //create empty user chats on firestore
+        navigate("/");
+      } catch (err) {
+        console.log(err);
+        setErr(true);
+        setLoading(false);
+      }
+
     } catch (err) {
       setErr(true);
       setLoading(false);

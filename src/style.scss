@@ -615,38 +615,54 @@ $usedgray3:#a0a0a0;
 }
 
 
-
-
-
-
-
-
-
 .landing{
     
     .topBar{
         position: sticky;
         top: 0;
-        height: 110px;
         background: #000;
-        width: 100%;
+        width: calc(100% - 20px);
+        z-index: 100;
+        padding: 10px;
+        text-align: right;
+        height: fit-content;
+        min-height: 80px;
         
+        img{
+            
+            height: 76px;
+            float: left;
+        }
+        p{
+            
+            color: white;
+            font-size: 20px;
+            padding-right: 20px;
+        }
     }
     main{
         min-height: 1000px;
         .focus{
             display: flex;
             
-            .home_banner{
-                padding-top: 100px;
-                height: 500.273px;
                 
-                max-height: 350px;
-                max-width: 60%;
+            .home_banner1{
+                max-height: 700px;
+                display: flex;
+                width: 100%
+            }
+            
+            
+            @media screen and (max-width: 1020px) {
+                .home_banner1 {
+                  display: none;
+                }
             }
             .formWrapper{
-                padding-top: 100px;
+                padding: 10px;
+                
                 margin: auto;
+                height: fit-content;                
                 h3{
                     text-align: center;
                 }
@@ -656,6 +672,7 @@ $usedgray3:#a0a0a0;
                     align-items: flex-start;
                     gap: 18px;
                     align-self: stretch;
+                    
                     .fullIn{
                         border-radius: 8px;
                         border: 1px solid #8D9298;
@@ -695,6 +712,8 @@ $usedgray3:#a0a0a0;
                         background: #197AFF;
                         color: white;
                         border: none;
+                        margin-bottom: 10px;
+                        cursor:pointer;
                     }
                 }
                 .hr-text {
@@ -722,7 +741,7 @@ $usedgray3:#a0a0a0;
                       position: relative;
                       display: inline-block;
                       color: black;
-                  
+                        
                       padding: 0 0.5em;
                       line-height: 1.5em;
                       // this is really the only tricky part, you need to specify the background color of the container element...
@@ -740,12 +759,25 @@ $usedgray3:#a0a0a0;
                     border: 2px solid #197AFF;
                     background-color: white;
                     color: #197AFF;
-                    
+                    cursor:pointer;
                 }
+            }
+            
+        }
+        .home_banner2{
+                
+            display: none;
+        }
+        @media screen and (max-width: 1020px) {
+            .home_banner2 {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 100%;
+                
             }
         }
         .pills{
-
             .pill{
                 border-radius: 30px;
                 margin: 5%;
@@ -756,6 +788,10 @@ $usedgray3:#a0a0a0;
                 .text{
                     padding: 10%;
                     background-color: #FFC862;
+                    font-size: 25px;
+                    h2{
+                        margin-bottom: 10px;
+                    }
                     p{
                         color: white;
                     }

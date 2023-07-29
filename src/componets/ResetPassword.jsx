@@ -25,9 +25,9 @@ const ResetPassword = ({change}) =>{
 
     return (
       <div className="formWrapper">
-        <h3 className="loginTitle">
+        <h2 className="loginTitle">
           Reset your account password
-        </h3>
+        </h2>
         <form onSubmit={triggerResetEmail}>
           <div className="fullIn">
             <div className="left">
@@ -40,7 +40,7 @@ const ResetPassword = ({change}) =>{
           </div>
 
           
-          <button className="logButton">Log In</button>
+          <button className="logButton">Send Email</button>
           <span onClick={() => change(1)} style={{cursor:'pointer'}}>
             back to log in
           </span>

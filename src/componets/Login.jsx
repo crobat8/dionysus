@@ -50,9 +50,9 @@ const Login = ({change}) => {
   return (
     
       <div className="formWrapper">
-        <h3 className="loginTitle">
+        <h2 className="loginTitle">
           Login to access your account
-        </h3>
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="fullIn">
             <div className="left">

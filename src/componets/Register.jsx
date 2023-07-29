@@ -85,9 +85,9 @@ const Register = ({change}) => {
   return (
     
       <div className="formWrapper">
-        <h3 className="loginTitle">
+        <h2 className="loginTitle">
           Register an account
-        </h3>
+        </h2>
         <form onSubmit={handleSubmit}>
           <div className="fullIn">
             <div className="left">

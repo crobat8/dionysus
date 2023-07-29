@@ -12,7 +12,7 @@ const Landing = () =>{
   const [slide,setSlide] = useState(1)
   const pillInfo = [
     {
-      title:"party",
+      title:"Party",
       description:"Find local events, get-togethers, or parties near you.",
       pic:logo
     },
@@ -44,13 +44,21 @@ const Landing = () =>{
   return (
     <div className="landing">
       <header className="topBar" >
-        {/* <img src={logo} alt='logo' /> */}
+        <img src={logo} alt='logo' /> 
+        <p>
+          kjsnopdnvfdslkpojnvsdlokfjnas;kljnvalkjnfds;kljsdafn   kj;ldnfs l;kjn kij a;ljkh 
+        </p>
       </header>
       <main >
         <div className='focus'> 
-          <img className='home_banner' src={background} alt='logo'/>
+          <div className='imageContainer'> 
+            <img className='home_banner1' src={background} alt='logo'/>
+          </div>
+          
           <HandleSwap/>
+          
         </div>
+        <img className='home_banner2' src={background} alt='logo'/>
         <div className='pills'>
             {pillInfo.map((e,i)=>{
               return(

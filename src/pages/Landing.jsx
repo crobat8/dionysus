@@ -46,7 +46,7 @@ const Landing = () =>{
       <header className="topBar" >
         <img src={logo} alt='logo' /> 
         <p>
-          kjsnopdnvfdslkpojnvsdlokfjnas;kljnvalkjnfds;kljsdafn   kj;ldnfs l;kjn kij a;ljkh 
+          PartyUp
         </p>
       </header>
       <main >

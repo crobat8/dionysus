@@ -628,6 +628,8 @@ $usedgray3:#a0a0a0;
         height: fit-content;
         min-height: 80px;
         
+        
+        
         img{
             
             height: 76px;
@@ -635,9 +637,12 @@ $usedgray3:#a0a0a0;
         }
         p{
             
-            color: white;
+            color: #FFF;
+        
             font-size: 20px;
+            padding-top: 30px;
             padding-right: 20px;
+            
         }
     }
     main{
@@ -649,11 +654,12 @@ $usedgray3:#a0a0a0;
             .home_banner1{
                 max-height: 700px;
                 display: flex;
-                width: 100%
+                width: 100%;
+                
             }
             
             
-            @media screen and (max-width: 1020px) {
+            @media screen and (max-width: 935px) {
                 .home_banner1 {
                   display: none;
                 }
@@ -768,7 +774,7 @@ $usedgray3:#a0a0a0;
                 
             display: none;
         }
-        @media screen and (max-width: 1020px) {
+        @media screen and (max-width: 935px) {
             .home_banner2 {
                 display: block;
                 margin-left: auto;

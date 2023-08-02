@@ -31,22 +31,21 @@ const Landing = () =>{
   function HandleSwap(){
     
     if(slide === 1){
-      
       return (
-      <FadeIn>
+      <FadeIn >
         <Login change={changeSlide}/>
       </FadeIn>
       )
       
     }else if(slide === 2){
       return(
-        <FadeIn>
+        <FadeIn >
           <ResetPassword change={changeSlide}/>
         </FadeIn>
       ) 
     }else if(slide === 3){
       return (
-        <FadeIn>
+        <FadeIn >
           <Register change={changeSlide}/>
         </FadeIn>
       ) 
@@ -54,6 +53,7 @@ const Landing = () =>{
   }
   const changeSlide = (x) =>{
     setSlide(x)
+    
   }
 
   return (

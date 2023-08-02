@@ -10,13 +10,15 @@ import {
   AiFillMail,
   AiOutlineKey
 } from 'react-icons/ai';
+import FadeIn from "react-fade-in";
+
 
 const Login = ({change}) => {
 
   const [err, setErr] = useState(false);
   const navigate = useNavigate();
   let iconStyles = { color: "#1B2430", height:"16px",width:"16px",padding:"5px"};
-  
+
   const handleSubmit = async (e) => {
     console.log(e.target[0].value)
     console.log(e.target[1].value)
@@ -48,8 +50,9 @@ const Login = ({change}) => {
   
 
   return (
-    
-      <div className="formWrapper">
+      
+      <div className="formWrapper"  >
+        
         <h2 className="loginTitle">
           Login to access your account
         </h2>
@@ -81,6 +84,8 @@ const Login = ({change}) => {
         <button onClick={() => change(3)} className="signUpButton">
           Sign Up
         </button>
+        
+        
         {/* <button onClick={handleGuest}>Guest Login</button> */}
       </div>
     

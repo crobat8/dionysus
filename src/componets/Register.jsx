@@ -13,6 +13,8 @@ import {
   AiOutlineKey,
   AiOutlineUser
 } from 'react-icons/ai';
+import FadeIn from "react-fade-in";
+
 const Register = ({change}) => {
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -85,6 +87,7 @@ const Register = ({change}) => {
   return (
     
       <div className="formWrapper">
+        
         <h2 className="loginTitle">
           Register an account
         </h2>
@@ -138,6 +141,8 @@ const Register = ({change}) => {
             Log In
           </strong>
         </span>
+      
+        
       </div>
     
   );

@@ -7,6 +7,7 @@ import ResetPassword from '../componets/ResetPassword';
 import background from '../img/home_banner_edit.png'
 import logo from '../img/partyuplogo.png'
 import Pill from '../componets/Pill';
+import FadeIn from 'react-fade-in';
 
 const Landing = () =>{ 
   const [slide,setSlide] = useState(1)
@@ -30,11 +31,25 @@ const Landing = () =>{
   function HandleSwap(){
     
     if(slide === 1){
-      return <Login change={changeSlide}/>;
+      
+      return (
+      <FadeIn>
+        <Login change={changeSlide}/>
+      </FadeIn>
+      )
+      
     }else if(slide === 2){
-      return <ResetPassword change={changeSlide}/>;
+      return(
+        <FadeIn>
+          <ResetPassword change={changeSlide}/>
+        </FadeIn>
+      ) 
     }else if(slide === 3){
-      return <Register change={changeSlide}/>;
+      return (
+        <FadeIn>
+          <Register change={changeSlide}/>
+        </FadeIn>
+      ) 
     }
   }
   const changeSlide = (x) =>{
@@ -43,13 +58,15 @@ const Landing = () =>{
 
   return (
     <div className="landing">
+      
       <header className="topBar" >
         <img src={logo} alt='logo' /> 
         <p>
           PartyUp
         </p>
       </header>
-      <main >
+      <FadeIn>
+        <main >
         <div className='focus'> 
           <div className='imageContainer'> 
             <img className='home_banner1' src={background} alt='logo'/>
@@ -60,6 +77,7 @@ const Landing = () =>{
         </div>
         <img className='home_banner2' src={background} alt='logo'/>
         <div className='pills'>
+
             {pillInfo.map((e,i)=>{
               return(
                 <Pill data={e} count={i}/>
@@ -68,6 +86,8 @@ const Landing = () =>{
             })}
         </div>
       </main>
+      </FadeIn>
+      
       <footer className='botBar'>
       </footer>
     </div>

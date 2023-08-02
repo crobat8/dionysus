@@ -10,6 +10,8 @@ import {
   AiFillMail,
   AiOutlineKey
 } from 'react-icons/ai';
+import FadeIn from "react-fade-in";
+
 const ResetPassword = ({change}) =>{
 
     const [email, setEmail] = useState('')
@@ -25,6 +27,7 @@ const ResetPassword = ({change}) =>{
 
     return (
       <div className="formWrapper">
+        
         <h2 className="loginTitle">
           Reset your account password
         </h2>
@@ -46,6 +49,7 @@ const ResetPassword = ({change}) =>{
           </span>
           {/* <p style={{color: "#00b2be"}}>{loading && <span>Reset email has been sent</span>}</p> */}
         </form>
+        
       </div>
         
     )

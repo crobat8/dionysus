@@ -202,8 +202,6 @@ const Parties = () =>{
               GOING
             </button>
               
-            
-            
           </div>
           <div className="partyChat">
             <PartyChat event={event} cleanText = {myData[0].cleanText}/>
@@ -225,7 +223,7 @@ if(loading||!isLoaded||loading2||loading3){
       Loading
     </h1>
   }else{
-    //console.log(currentUser);
+    
   }
   
   return (

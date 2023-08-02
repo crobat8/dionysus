@@ -32,20 +32,20 @@ const Landing = () =>{
     
     if(slide === 1){
       return (
-      <FadeIn >
+      <FadeIn className='fade'>
         <Login change={changeSlide}/>
       </FadeIn>
       )
       
     }else if(slide === 2){
       return(
-        <FadeIn >
+        <FadeIn className='fade'>
           <ResetPassword change={changeSlide}/>
         </FadeIn>
       ) 
     }else if(slide === 3){
       return (
-        <FadeIn >
+        <FadeIn className='fade'>
           <Register change={changeSlide}/>
         </FadeIn>
       ) 

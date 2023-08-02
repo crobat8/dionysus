@@ -659,15 +659,16 @@ $usedgray3:#a0a0a0;
             }
             
             
-            @media screen and (max-width: 935px) {
+            @media screen and (max-width: 1130px) {
                 .home_banner1 {
                   display: none;
                 }
             }
-            .formWrapper{
-                padding: 10px;
-                
+            .fade{
                 margin: auto;
+                
+                .formWrapper{
+                padding: 10px;
                 height: fit-content;                
                 h3{
                     text-align: center;
@@ -768,13 +769,15 @@ $usedgray3:#a0a0a0;
                     cursor:pointer;
                 }
             }
+            }
+            
             
         }
         .home_banner2{
                 
             display: none;
         }
-        @media screen and (max-width: 935px) {
+        @media screen and (max-width: 1130px) {
             .home_banner2 {
                 display: block;
                 margin-left: auto;

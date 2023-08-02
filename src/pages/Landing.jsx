@@ -65,28 +65,30 @@ const Landing = () =>{
           PartyUp
         </p>
       </header>
-      <FadeIn>
-        <main >
-        <div className='focus'> 
-          <div className='imageContainer'> 
-            <img className='home_banner1' src={background} alt='logo'/>
+      <main >
+        <FadeIn delay={100}>
+          <div className='focus'> 
+            <div className='imageContainer'> 
+              <img className='home_banner1' src={background} alt='logo'/>
+            </div>
+            
+            <HandleSwap/>
+            
           </div>
-          
-          <HandleSwap/>
-          
-        </div>
-        <img className='home_banner2' src={background} alt='logo'/>
-        <div className='pills'>
-
-            {pillInfo.map((e,i)=>{
-              return(
-                <Pill data={e} count={i}/>
-              )
-              
-            })}
-        </div>
+          <img className='home_banner2' src={background} alt='logo'/>
+          <div className='pills'>
+            
+              {pillInfo.map((e,i)=>{
+                return(
+                  <Pill data={e} count={i}/>
+                )
+                
+              })}
+            
+          </div>
+        </FadeIn>
       </main>
-      </FadeIn>
+      
       
       <footer className='botBar'>
       </footer>
